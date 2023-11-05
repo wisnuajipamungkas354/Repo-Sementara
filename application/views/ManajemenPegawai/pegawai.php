@@ -2,7 +2,7 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="card h4 mb-4 border-bottom-danger font-weight-bold text-danger">
+                <div class="card h4 mb-4 border-bottom-success font-weight-bold text-secondary">
                     <div class="card-body">
                         <?= $title; ?>
                     </div>
@@ -40,12 +40,12 @@
                                     <table class="table" id="table" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-dark">
-                                                <th>#</th>
-                                                <th>ID Pegawai</th>
-                                                <th>Nama Pegawai</th>
-                                                <th>No. Telepon</th>
-                                                <th>Jabatan</th>
-                                                <th></th>
+                                                <th bgcolor="#b2cef9">#</th>
+                                                <th bgcolor="#b2cef9">ID Pegawai</th>
+                                                <th bgcolor="#b2cef9">Nama Pegawai</th>
+                                                <th bgcolor="#b2cef9">No. Telepon</th>
+                                                <th bgcolor="#b2cef9">Jabatan</th>
+                                                <th bgcolor="#b2cef9"></th>
                                             </tr>
                                         </thead>
                                         <tbody>

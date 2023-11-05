@@ -2,7 +2,7 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="card h4 mb-4 border-bottom-danger font-weight-bold text-danger">
+                <div class="card h4 mb-4 border-bottom-success font-weight-bold text-secondary">
                     <div class="card-body">
                         <?= $title; ?>
                     </div>
@@ -36,14 +36,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table" id="table" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="table" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-dark">
-                                                <th>#</th>
-                                                <th>ID Laporan</th>
-                                                <th>Tanggal</th>
-                                                <th>No. Nota</th>
-                                                <th>Total</th>
+                                                <th bgcolor="#b2cef9">#</th>
+                                                <th bgcolor="#b2cef9">ID Laporan</th>
+                                                <th bgcolor="#b2cef9">Tanggal</th>
+                                                <th bgcolor="#b2cef9">No. Nota</th>
+                                                <th bgcolor="#b2cef9">Total</th>
                                             </tr>
                                         </thead>
                                         <tfoot>

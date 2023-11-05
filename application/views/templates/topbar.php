@@ -21,12 +21,12 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama_pegawai']; ?>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama_karyawan']; ?>
                                     (<?php
                                         if ($user['id_role'] == 1) {
                                             echo "Admin";
                                         } else if ($user['id_role'] == 2) {
-                                            echo "Manajer";
+                                            echo "Owner";
                                         }
                                         ?>)
                                 </span>

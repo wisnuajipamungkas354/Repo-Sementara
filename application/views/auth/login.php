@@ -46,7 +46,7 @@
                                 <div class="p-3">
                                     <div class="text-center">
                                         <img src="<?= base_url('assets/img/login/'); ?>ahayy.png" alt="avatar" width="150">
-                                        <h2 class="h5 text-dark mt-4 mb-3 text-monospace">Sistem Pengelolaan Bengkel<br>AHAYY</h2>
+                                        <h2 class="h5 text-dark mt-4 mb-3 text-monospace">Sistem Pengelolaan Servis<br>Wisnu-Tech</h2>
                                     </div>
                                     <?= $this->session->flashdata('message'); ?>
                                     <hr />

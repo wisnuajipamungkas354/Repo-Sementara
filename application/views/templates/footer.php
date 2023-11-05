@@ -8,7 +8,7 @@
         <footer class="sticky-footer pl-3">
             <div class="container my-auto">
                 <div class="copyright text-center">
-                    <span>Copyright &copy; Sistem Pengelolaan Bengkel - AHAYY <?= date('Y'); ?></span>
+                    <span>Copyright &copy; Sistem Pengelolaan Servis - Wisnu Tech <?= date('Y'); ?></span>
                 </div>
             </div>
         </footer>

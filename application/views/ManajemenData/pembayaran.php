@@ -2,9 +2,8 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="card h4 mb-4 border-bottom-danger font-weight-bold text-danger">
-                    <div class="card-body">
-                        <?= $title; ?>
+                <div class="card h4 mb-4 border-bottom-success font-weight-bold text-secondary">
+                    <div class="card-body"> Riwayat Pembayaran
                     </div>
                 </div>
 
@@ -37,17 +36,16 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table" id="table" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="table" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-dark">
-                                                <th>#</th>
-                                                <th>No. Nota</th>
-                                                <th>Nama Admin</th>
-                                                <th>ID Servis</th>
-                                                <th>Tanggal</th>
-                                                <th>Nama Pelanggan</th>
-                                                <th>Total</th>
-                                                <th></th>
+                                                <th bgcolor="#b2cef9">#</th>
+                                                <th bgcolor="#b2cef9">No. Nota</th>
+                                                <th bgcolor="#b2cef9">Tanggal Bayar</th>
+                                                <th bgcolor="#b2cef9">ID Servis</th>
+                                                <th bgcolor="#b2cef9">Nama User</th>
+                                                <th bgcolor="#b2cef9">Total</th>
+                                                <th bgcolor="#b2cef9"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -56,9 +54,8 @@
                                                 <tr>
                                                     <td><?= $i; ?></td>
                                                     <td><?= $pembayaran['no_nota']; ?></td>
-                                                    <td><?= $pembayaran['nm_admin']; ?></td>
-                                                    <td><?= $pembayaran['id_servis']; ?></td>
                                                     <td><?= $pembayaran['tgl']; ?></td>
+                                                    <td><?= $pembayaran['id_servis']; ?></td>
                                                     <td><?= $pembayaran['nm_pelanggan']; ?></td>
                                                     <td>Rp <?= number_format($pembayaran['total'], 0, ',', '.'); ?></td>
                                                     <td style="text-align: center;">

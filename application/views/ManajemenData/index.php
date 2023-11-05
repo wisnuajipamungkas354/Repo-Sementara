@@ -2,9 +2,9 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="card h4 mb-4 border-bottom-danger font-weight-bold text-danger">
-                    <div class="card-body">
-                        <?= $title; ?>
+                <div class="card h4 mb-4 border-bottom-success font-weight-bold text-secondary">
+                    <div class="card-body">Riwayat Servis
+                        
                     </div>
                 </div>
 
@@ -37,16 +37,16 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table" id="table" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="table" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-dark">
-                                                <th>#</th>
-                                                <th>ID Servis</th>
-                                                <th>Tanggal</th>
-                                                <th>Nama Mekanik</th>
-                                                <th>Nama Pelanggan</th>
-                                                <th>Keluhan</th>
-                                                <th></th>
+                                                <th bgcolor="#b2cef9">#</th>
+                                                <th bgcolor="#b2cef9">ID Servis</th>
+                                                <th bgcolor="#b2cef9">Tanggal Masuk</th>
+                                                <th bgcolor="#b2cef9">Nama User</th>
+                                                <th bgcolor="#b2cef9">Tipe Laptop</th>
+                                                <th bgcolor="#b2cef9">Keluhan Awal</th>
+                                                <th bgcolor="#b2cef9"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -56,8 +56,8 @@
                                                     <td><?= $i; ?></td>
                                                     <td><?= $servis['id_servis']; ?></td>
                                                     <td><?= $servis['tgl']; ?></td>
-                                                    <td><?= $servis['nm_mekanik']; ?></td>
                                                     <td><?= $servis['nm_pelanggan']; ?></td>
+                                                    <td><?= $servis['merk_kendaraan']; ?></td>
                                                     <td><?= $servis['keluhan']; ?></td>
                                                     <td style="text-align: center;">
                                                         <a href="<?= base_url('ManajemenData/servis_ekspor/'); ?><?= $servis['id_servis']; ?>" title="Ekspor" class="btn btn-circle btn-danger"><i class="fas fa-fw fa-file-pdf"></i></a>
