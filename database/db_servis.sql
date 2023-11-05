@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2023 at 10:32 AM
+-- Generation Time: Nov 05, 2023 at 01:24 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -170,6 +170,13 @@ CREATE TABLE `user` (
   `status_akun` enum('Aktif','Nonaktif') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_karyawan`, `id_role`, `nm_karyawan`, `username`, `password`, `image`, `status_akun`) VALUES
+('K01', 1, 'Wisnu Aji Pamungkas', 'admin01', 'admin01', 'default.svg', 'Aktif');
+
 -- --------------------------------------------------------
 
 --
@@ -181,6 +188,16 @@ CREATE TABLE `user_access` (
   `id_role` int(4) DEFAULT NULL,
   `id_menu` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_access`
+--
+
+INSERT INTO `user_access` (`id_access`, `id_role`, `id_menu`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -194,6 +211,16 @@ CREATE TABLE `user_menu` (
   `url` varchar(100) DEFAULT NULL,
   `icon` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_menu`
+--
+
+INSERT INTO `user_menu` (`id_menu`, `title`, `url`, `icon`) VALUES
+(1, 'Dashboard', 'dashboard', 'fas fa-fw fa-tachometer-alt'),
+(2, 'Servis', 'ManajemenData', 'fas fa-fw fa-tools'),
+(3, 'Pembayaran', 'ManajemenData/pembayaran', 'fas fa-fw fa-file-invoice-dollar'),
+(4, 'Laporan', 'ManajemenData/Laporan', 'fas fa-fw fa-file-alt');
 
 -- --------------------------------------------------------
 
@@ -310,13 +337,13 @@ ALTER TABLE `detail_servis`
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id_access` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_access` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_role`

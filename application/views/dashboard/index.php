@@ -24,11 +24,17 @@
                                                 Pemasukan
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?php
+                                                <?php
                                                         $sql = "SELECT SUM(total) FROM laporan";
                                                         $result = $this->db->query($sql)->row_array();
+                                                        $harga = 0;
+                                                        if (isset($result['SUM(total)'])){
+                                                            $harga = number_format($result['SUM(total)'], 0, ',', '.');
+                                                            echo "Rp ".$harga;
+                                                        }else{
+                                                            echo "Rp ".$harga;
+                                                        }
                                                         ?>
-                                            Rp <?= number_format($result['SUM(total)'], 0, ',', '.'); ?> -->
                                             </div>
                                         </div>
                                         <div class="col-auto">
