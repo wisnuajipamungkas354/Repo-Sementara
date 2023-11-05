@@ -8,8 +8,8 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="card h4 mb-4 border-bottom-success font-weight-bold text-secondary">
-                        <div class="card-body">
+                    <div class="card h4 mt-2 mb-4 border-bottom-success font-weight-bold text-secondary bg-light border-0 rounded-0">
+                        <div class="card-body text-dark">
                             <?= $title; ?>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                                         $sql = "SELECT SUM(total) FROM laporan";
                                                         $result = $this->db->query($sql)->row_array();
                                                         ?>
-                                            Rp <?= number_format($result['SUM(total)'], 0, ',', '.'); ?> -->
+                                                Rp <?= number_format($result['SUM(total)'], 0, ',', '.'); ?> -->
                                             </div>
                                         </div>
                                         <div class="col-auto">
