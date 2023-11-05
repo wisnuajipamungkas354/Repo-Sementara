@@ -24,7 +24,7 @@ class ManajemenData extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        // $this->load->view('templates/topbar', $data);
         $this->load->view('ManajemenData/index', $data);
         $this->load->view('templates/footer');
     }
@@ -52,7 +52,7 @@ class ManajemenData extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/servis_tambah', $data);
             $this->load->view('templates/footer');
         } else {
@@ -173,7 +173,7 @@ class ManajemenData extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/servis_ubah', $data);
             $this->load->view('templates/footer');
         } else {
@@ -203,7 +203,7 @@ class ManajemenData extends CI_Controller
         if ($db->errno == 0) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/servis_detail', $data);
             $this->load->view('templates/footer');
         } else {
@@ -242,7 +242,7 @@ class ManajemenData extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        // $this->load->view('templates/topbar', $data);
         $this->load->view('ManajemenData/pembayaran', $data);
         $this->load->view('templates/footer');
     }
@@ -264,7 +264,7 @@ class ManajemenData extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/pembayaran_tambah', $data);
             $this->load->view('templates/footer');
         } else {
@@ -386,7 +386,7 @@ class ManajemenData extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/pembayaran_ubah', $data);
             $this->load->view('templates/footer');
         } else {
@@ -407,7 +407,7 @@ class ManajemenData extends CI_Controller
         if ($db->errno == 0) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/pembayaran_detail', $data);
             $this->load->view('templates/footer');
         } else {
@@ -449,7 +449,7 @@ class ManajemenData extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        // $this->load->view('templates/topbar', $data);
         $this->load->view('ManajemenData/laporan', $data);
         $this->load->view('templates/footer');
     }
@@ -466,7 +466,7 @@ class ManajemenData extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/laporan_tambah', $data);
             $this->load->view('templates/footer');
         } else {
@@ -494,7 +494,7 @@ class ManajemenData extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            // $this->load->view('templates/topbar', $data);
             $this->load->view('ManajemenData/laporan_ubah', $data);
             $this->load->view('templates/footer');
         } else {
