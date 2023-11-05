@@ -33,7 +33,7 @@
     <div id="wrapper">
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <!-- <div id="content-wrapper" class="d-flex flex-row"> -->
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <!-- <div id="content"> -->
