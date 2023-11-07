@@ -1,26 +1,40 @@
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav background sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon rotate-n-15">
                 <img src="<?= base_url('assets/img/login/'); ?>ahayy-rounded.png" alt="logo" width="50">
             </div>
-            <div class="sidebar-brand-text mx-3">Wisnu-Tech</div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
+        
+        <!-- jabatan -->
+        <div class="text-center font-weight-bold text-white text-uppercase">
+            <?php 
+            $id_role = $this->session->userdata('id_role');
+            $queryJabatan = "SELECT *  
+            FROM `user`
+            JOIN `user_role`
+            ON `user`.`id_role` = `user_role`.`id_role`
+            WHERE `user`.`id_role` = $id_role";
+            $jabatan = $this->db->query($queryJabatan)->result_array()[$id_role - 1];
+            ?>
+            <?= $jabatan['nm_karyawan']; ?>
+        </div>
+        <div class="text-center font-weight-bold text-uppercase">
+            <?= $jabatan['nm_role']; ?>
+        </div>
         <!-- Query Menu  -->
         <?php
-        $id_role = $this->session->userdata('id_role');
         $queryMenu = "SELECT * 
-                            FROM `user_menu` 
-                            JOIN `user_access`
-                            ON `user_menu`.`id_menu` = `user_access`.`id_menu`
-                            WHERE `user_access`.`id_role` = $id_role
-                            ORDER BY `user_access`.`id_menu` ASC";
+            FROM `user_menu` 
+            JOIN `user_access`
+            ON `user_menu`.`id_menu` = `user_access`.`id_menu`
+            WHERE `user_access`.`id_role` = $id_role
+            ORDER BY `user_access`.`id_menu` ASC";
 
         $menu = $this->db->query($queryMenu)->result_array();
         ?>
