@@ -34,7 +34,7 @@ class ManajemenData extends CI_Controller
         $data['title'] = 'Tambah data servis';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-        $data['barang'] = $this->ManajemenData_model->get_barang();
+        $data['part'] = $this->ManajemenData_model->get_part();
         $data['id_servis'] = $this->ManajemenData_model->auto_idservis();
         $data['id_pelanggan'] = $this->ManajemenData_model->auto_idpelanggan();
 
@@ -121,12 +121,12 @@ class ManajemenData extends CI_Controller
             $pdf->Ln(5);
             $pdf->Cell(30, 10, 'ID Pelanggan', 0, 0);
             $pdf->Cell(90, 10, ' : ' . $servis['id_pelanggan'], 0, 0);
-            $pdf->Cell(30, 10, 'ID Barang', 0, 0);
+            $pdf->Cell(30, 10, 'ID Part', 0, 0);
             $pdf->Cell(30, 10, ' : ' . $servis['id_brg'], 0, 1);
 
             $pdf->Cell(30, 10, 'Nama Pelanggan', 0, 0);
             $pdf->Cell(90, 10, ' : ' . $servis['nm_pelanggan'], 0, 0);
-            $pdf->Cell(30, 10, 'Nama Barang', 0, 0);
+            $pdf->Cell(30, 10, 'Nama Part', 0, 0);
             $pdf->Cell(30, 10, ' : ' . $servis['nm_brg'], 0, 1);
 
             $pdf->Cell(30, 10, 'No. Telepon', 0, 0);
@@ -157,7 +157,7 @@ class ManajemenData extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['ubah_servis'] = $this->ManajemenData_model->get_servisId($id);
-        $data['barang'] = $this->ManajemenData_model->get_barang();
+        $data['part'] = $this->ManajemenData_model->get_part();
 
         $this->form_validation->set_rules('nm_pelanggan', 'Nama Pelanggan', 'required');
         $this->form_validation->set_rules('noTlp', 'No. Telepon', 'required');
@@ -165,10 +165,10 @@ class ManajemenData extends CI_Controller
         $this->form_validation->set_rules('no_plat', 'No. Plat', 'required');
         $this->form_validation->set_rules('keluhan', 'Keluhan', 'required');
         $this->form_validation->set_rules('nm_mekanik', 'Nama Mekanik', 'required');
-        $this->form_validation->set_rules('id_brg', 'Nama Barang', 'required');
+        $this->form_validation->set_rules('id_part', 'Nama Part', 'required');
         // $this->form_validation->set_rules('nm_brg', 'Nama Barang', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required');
-        $this->form_validation->set_rules('jumlah', 'Jumlah Barang', 'required');
+        $this->form_validation->set_rules('jumlah', 'Jumlah Part', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -177,12 +177,12 @@ class ManajemenData extends CI_Controller
             $this->load->view('ManajemenData/servis_ubah', $data);
             $this->load->view('templates/footer');
         } else {
-            $id_barang = $this->input->post('id_brg');
+            $id_part = $this->input->post('id_part');
             $jumlah = $this->input->post('jumlah');
-            $query = $this->db->get_where('barang', ['id_brg' => $id_barang])->row_array();
+            $query = $this->db->get_where('part', ['id_part' => $id_part])->row_array();
 
             if ($jumlah > $query['stok']) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal, jumlah barang melampaui ketersediaan!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal, jumlah part melampaui ketersediaan!</div>');
                 redirect('ManajemenData');
             } else {
                 $this->ManajemenData_model->ubah_servis();
@@ -256,7 +256,7 @@ class ManajemenData extends CI_Controller
 
         $this->form_validation->set_rules('id_servis', 'ID Servis', 'required');
         $this->form_validation->set_rules('nm_mekanik', 'Nama Mekanik', 'required');
-        $this->form_validation->set_rules('nm_brg', 'Nama Barang', 'required');
+        $this->form_validation->set_rules('nm_part', 'Nama Part', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required');
         $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim');
         $this->form_validation->set_rules('jasa', 'Harga Jasa', 'required|trim');
@@ -339,18 +339,18 @@ class ManajemenData extends CI_Controller
 
             $pdf->SetFont('Arial', 'B', 12);
 
-            $pdf->Cell(124, 5, 'Barang', 1, 0);
+            $pdf->Cell(124, 5, 'Part', 1, 0);
             $pdf->Cell(31, 5, 'Jumlah', 1, 0);
             $pdf->Cell(40, 5, 'Harga', 1, 1);
 
             $pdf->SetFont('Arial', '', 12);
 
-            $pdf->Cell(124, 5, '' . $pembayaran['nm_brg'], 1, 0);
-            $pdf->Cell(31, 5, '' . $pembayaran['jumlah_brg'], 1, 0);
-            $pdf->Cell(40, 5, 'Rp ' . number_format($pembayaran['harga_brg'], 0, ',', '.'), 1, 1, 'R');
+            $pdf->Cell(124, 5, '' . $pembayaran['nm_part'], 1, 0);
+            $pdf->Cell(31, 5, '' . $pembayaran['jumlah_part'], 1, 0);
+            $pdf->Cell(40, 5, 'Rp ' . number_format($pembayaran['harga_part'], 0, ',', '.'), 1, 1, 'R');
 
             $pdf->Cell(120, 5, '', 0, 0);
-            $pdf->Cell(35, 5, 'Subtotal Barang', 0, 0, 'R');
+            $pdf->Cell(35, 5, 'Subtotal Part', 0, 0, 'R');
             $pdf->Cell(40, 5, 'Rp ' . number_format($pembayaran['subtotal_brg'], 0, ',', '.'), 1, 1, 'R');
 
             $pdf->Cell(120, 5, '', 0, 0);
@@ -525,14 +525,14 @@ class ManajemenData extends CI_Controller
     // END DATA LAPORAN //
 
     // DATA FOR AUTOFILL //
-    public function barang_list()
+    public function part_list()
     {
-        $barang = $this->input->post('id_brg');
-        $result = $this->ManajemenData_model->get_barangList($barang);
+        $part = $this->input->post('id_part');
+        $result = $this->ManajemenData_model->get_partList($part);
         foreach ($result as $row) {
             $data = [
-                'nm_brg' => $row->nm_brg,
-                'harga_brg' => $row->harga_brg,
+                'nm_part' => $row->nm_part,
+                'harga_part' => $row->harga_part,
             ];
         }
         echo json_encode($data);

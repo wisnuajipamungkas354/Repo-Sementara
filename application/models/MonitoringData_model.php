@@ -51,16 +51,16 @@ class MonitoringData_model extends CI_model
         return $newId;
     }
 
-    public function auto_idbarang()
+    public function auto_idPart()
     {
-        $this->db->select('RIGHT(id_brg,3) as idBarang', false);
-        $this->db->order_by("id_brg", "DESC");
+        $this->db->select('RIGHT(id_part,3) as idPart', false);
+        $this->db->order_by("id_part", "DESC");
         $this->db->limit(1);
-        $query = $this->db->get('barang');
+        $query = $this->db->get('part');
 
         if ($query->num_rows() <> 0) {
             $data = $query->row();
-            $id = intval($data->idBarang) + 1;
+            $id = intval($data->idPart) + 1;
         } else {
             $id  = 1;
         }
@@ -71,37 +71,37 @@ class MonitoringData_model extends CI_model
         return $newId;
     }
 
-    public function get_barangId($id)
+    public function get_partId($id)
     {
-        return $this->db->get_where('barang', ['id_brg' => $id])->row_array();
+        return $this->db->get_where('part', ['id_part' => $id])->row_array();
     }
 
-    public function ubah_barang()
+    public function ubah_part()
     {
-        $barang = [
-            'id_brg' => $this->input->post('id_brg'),
-            'nm_brg' => $this->input->post('nm_brg'),
+        $part = [
+            'id_part' => $this->input->post('id_part'),
+            'nm_part' => $this->input->post('nm_part'),
             'stok' => $this->input->post('jumlah'),
-            'harga_brg' => $this->input->post('harga')
+            'harga_part' => $this->input->post('harga')
         ];
-        $this->db->where('id_brg', $this->input->post('id_brg'));
-        $this->db->update('barang', $barang);
+        $this->db->where('id_part', $this->input->post('id_part'));
+        $this->db->update('part', $part);
     }
 
-    public function hapus_barang($id)
+    public function hapus_part($id)
     {
-        $this->db->delete('faktur', ['id_brg' => $id]);
-        $this->db->delete('barang', ['id_brg' => $id]);
+        $this->db->delete('faktur', ['id_part' => $id]);
+        $this->db->delete('part', ['id_part' => $id]);
     }
 
-    public function search_barang()
+    public function search_part()
     {
         $keyword = $this->input->post('keyword');
-        $this->db->like('id_brg', $keyword);
-        $this->db->or_like('nm_brg', $keyword);
-        $this->db->or_like('harga_brg', $keyword);
+        $this->db->like('id_part', $keyword);
+        $this->db->or_like('nm_part', $keyword);
+        $this->db->or_like('harga_part', $keyword);
         $this->db->or_like('stok', $keyword);
-        return $this->db->get('barang')->result_array();
+        return $this->db->get('part')->result_array();
     }
     // END DATA BARANG //
 }

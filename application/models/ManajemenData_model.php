@@ -39,7 +39,7 @@ class ManajemenData_model extends CI_model
         $pelanggan = [
             'id_pelanggan' => $this->input->post('id_pelanggan'),
             'nm_pelanggan' => $this->input->post('nm_pelanggan'),
-            'noTlp_pelanggan' => $this->input->post('noTlp')
+            'no_hp' => $this->input->post('no_hp')
         ];
         $this->db->where('id_pelanggan', $this->input->post('id_pelanggan'));
         $this->db->update('pelanggan', $pelanggan);
@@ -49,18 +49,23 @@ class ManajemenData_model extends CI_model
             'tgl' => Date('Y-m-d H:i:s'),
             'id_pelanggan' => $this->input->post('id_pelanggan'),
             'nm_pelanggan' => $this->input->post('nm_pelanggan'),
-            'noTlp_pelanggan' => $this->input->post('noTlp'),
-            'merk_kendaraan' => $this->input->post('merk'),
-            'no_plat' => $this->input->post('no_plat'),
-            'keluhan' => $this->input->post('keluhan'),
-            'nm_mekanik' => $this->input->post('nm_mekanik'),
-            'id_brg' => $this->input->post('id_brg'),
-            'nm_brg' => $this->input->post('nm_brg'),
-            'harga_brg' => $this->input->post('harga'),
-            'jumlah_brg' => $this->input->post('jumlah')
+            'no_hp' => $this->input->post('no_hp'),
+            'tipe_laptop' => $this->input->post('tipe_laptop'),
+            'keluhan_awal' => $this->input->post('keluhan_awal'),
+            'nm_teknisi' => $this->input->post('nm_teknisi')
         ];
+
+        $detail_servis = [
+            'id_servis' => $this->input->post('id_servis'),
+            'id_part' => $this->input->post('id_part'),
+            'nm_part' => $this->input->post('nm_part'),
+            'harga' => $this->input->post('harga'),
+            'jml_part' => $this->input->post('jml_part')
+        ];
+
         $this->db->where('id_servis', $this->input->post('id_servis'));
         $this->db->update('servis', $servis);
+        $this->db->update('detail_servis', $detail_servis);
     }
 
     public function hapus_servis($id)
@@ -76,15 +81,14 @@ class ManajemenData_model extends CI_model
         $this->db->or_like('tgl', $keyword);
         $this->db->or_like('id_pelanggan', $keyword);
         $this->db->or_like('nm_pelanggan', $keyword);
-        $this->db->or_like('noTlp_pelanggan', $keyword);
-        $this->db->or_like('merk_kendaraan', $keyword);
-        $this->db->or_like('no_plat', $keyword);
-        $this->db->or_like('keluhan', $keyword);
-        $this->db->or_like('nm_mekanik', $keyword);
-        $this->db->or_like('id_brg', $keyword);
-        $this->db->or_like('nm_brg', $keyword);
-        $this->db->or_like('harga_brg', $keyword);
-        $this->db->or_like('jumlah_brg', $keyword);
+        $this->db->or_like('no_hp', $keyword);
+        $this->db->or_like('tipe_laptop', $keyword);
+        $this->db->or_like('keluhan_awal', $keyword);
+        $this->db->or_like('nm_teknisi', $keyword);
+        $this->db->or_like('id_part', $keyword);
+        $this->db->or_like('nm_part', $keyword);
+        $this->db->or_like('harga', $keyword);
+        $this->db->or_like('jml_part', $keyword);
         return $this->db->get('servis')->result_array();
     }
 
@@ -97,16 +101,16 @@ class ManajemenData_model extends CI_model
     // END DATA SERVICE //
 
     // DATA BARANG //
-    public function get_barang()
+    public function get_part()
     {
-        return $this->db->get('barang')->result_array();
+        return $this->db->get('part')->result_array();
     }
 
-    public function get_barangList($barang)
+    public function get_partList($part)
     {
         $this->db->select('*');
-        $this->db->where('id_brg', $barang);
-        return $this->db->get('barang')->result();
+        $this->db->where('id_part', $part);
+        return $this->db->get('part')->result();
     }
     // END DATA BARANG //
 
@@ -177,7 +181,7 @@ class ManajemenData_model extends CI_model
             'jumlah_brg' => $this->input->post('jumlah'),
             'subtotal_brg' => $this->input->post('harga') * $this->input->post('jumlah'),
             'keluhan' => $this->input->post('keluhan'),
-            'nm_mekanik' => $this->input->post('nm_mekanik'),
+            'nm_teknisi' => $this->input->post('nm_teknisi'),
             'harga_jasa' => $this->input->post('jasa'),
             'total' => $this->input->post('harga') * $this->input->post('jumlah') + $this->input->post('jasa')
         ];
