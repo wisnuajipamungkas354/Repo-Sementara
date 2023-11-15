@@ -25,16 +25,16 @@
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold gold">
                                                 <?php
-                                                        $sql = "SELECT SUM(total) FROM laporan";
-                                                        $result = $this->db->query($sql)->row_array();
-                                                        $harga = 0;
-                                                        if (isset($result['SUM(total)'])){
-                                                            $harga = number_format($result['SUM(total)'], 0, ',', '.');
-                                                            echo "Rp ".$harga;
-                                                        }else{
-                                                            echo "Rp ".$harga;
-                                                        }
-                                                        ?>
+                                                $sql = "SELECT SUM(total) FROM laporan";
+                                                $result = $this->db->query($sql)->row_array();
+                                                $harga = 0;
+                                                if (isset($result['SUM(total)'])) {
+                                                    $harga = number_format($result['SUM(total)'], 0, ',', '.');
+                                                    echo "Rp " . $harga;
+                                                } else {
+                                                    echo "Rp " . $harga;
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -171,7 +171,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                                Mekanik
+                                                Teknisi
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold">
                                                 <?php
@@ -181,9 +181,9 @@
                                                 <?= $result['COUNT(id_karyawan)']; ?>
                                             </div>
                                         </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-user-cog gold fa-2x"></i>
-                                            </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user-cog gold fa-2x"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

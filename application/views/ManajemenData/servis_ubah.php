@@ -43,85 +43,78 @@
                                             <div class="form-group">
                                                 <label>No. Telepon Pelanggan</label>
                                                 <div class="col-sm">
-                                                    <input type="text" class="form-control" id="noTlp" name="noTlp" maxlength="15" value="<?= $ubah_servis['noTlp_pelanggan']; ?>">
-                                                    <?= form_error('noTlp', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                    <input type="text" class="form-control" id="no_hp" name="no_hp" maxlength="15" value="<?= $ubah_servis['no_hp']; ?>">
+                                                    <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Merk Kendaraan</label>
+                                                <label>Merk & Tipe Laptop</label>
                                                 <div class="col-sm">
-                                                    <input type="text" class="form-control text-capitalize" id="merk" name="merk" maxlength="30" value="<?= $ubah_servis['merk_kendaraan']; ?>">
+                                                    <input type="text" class="form-control text-capitalize" id="tipe_laptop" name="tipe_laptop" maxlength="30" value="<?= $ubah_servis['tipe_laptop']; ?>">
                                                     <?= form_error('merk', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>No. Plat</label>
+                                                <label>Keluhan Awal</label>
                                                 <div class="col-sm">
-                                                    <input type="text" class="form-control text-uppercase" id="no_plat" name="no_plat" maxlength="11" value="<?= $ubah_servis['no_plat']; ?>">
-                                                    <?= form_error('no_plat', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Keluhan</label>
-                                                <div class="col-sm">
-                                                    <textarea class="form-control" id="keluhan" name="keluhan"><?= $ubah_servis['keluhan']; ?></textarea>
+                                                    <textarea class="form-control" id="keluhan_awal" name="keluhan_awal"><?= $ubah_servis['keluhan_awal']; ?></textarea>
                                                     <?= form_error('keluhan', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Nama Mekanik</label>
+                                                <label>Nama Teknisi</label>
                                                 <?php
-                                                $query = "SELECT * FROM pegawai WHERE jabatan='Mekanik'";
+                                                $query = "SELECT * FROM karyawan WHERE jabatan='Teknisi'";
                                                 $result = $this->db->query($query)->result_array();
                                                 ?>
                                                 <div class="col-sm">
-                                                    <select class="form-control" id="nm_mekanik" name="nm_mekanik">
-                                                        <option value="">Pilih mekanik</option>
-                                                        <?php foreach ($result as $mekanik) : ?>
-                                                            <?php if ($mekanik['nm_pegawai'] == $ubah_servis['nm_mekanik']) : ?>
-                                                                <option value="<?= $mekanik['nm_pegawai']; ?>" selected><?= $mekanik['nm_pegawai']; ?></option>
+                                                    <select class="form-control" id="nm_teknisi" name="nm_teknisi">
+                                                        <option value="">Pilih Teknisi</option>
+                                                        <?php foreach ($result as $teknisi) : ?>
+                                                            <?php if ($teknisi['nm_karyawan'] == $ubah_servis['nm_teknisi']) : ?>
+                                                                <option value="<?= $teknisi['nm_karyawan']; ?>" selected><?= $teknisi['nm_karyawan']; ?></option>
                                                             <?php else : ?>
-                                                                <option value="<?= $mekanik['nm_pegawai']; ?>"><?= $mekanik['nm_pegawai']; ?></option>
+                                                                <option value="<?= $teknisi['nm_karyawan']; ?>"><?= $teknisi['nm_karyawan']; ?></option>
                                                             <?php endif; ?>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <?= form_error('nm_mekanik', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                    <?= form_error('nm_teknisi', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Nama Barang</label>
                                                 <div class="col-sm">
-                                                    <select type="text" class="form-control" id="id_brg" name="id_brg">
+                                                    <select type="text" class="form-control" id="id_part" name="id_part">
                                                         <option value="">Pilih barang</option>
-                                                        <?php foreach ($barang as $b) : ?>
-                                                            <?php if ($b['id_brg'] == $ubah_servis['id_brg']) : ?>
-                                                                <option value="<?= $b['id_brg']; ?>" selected><?= $b['nm_brg']; ?></option>
+                                                        <?php foreach ($part as $p) : ?>
+                                                            <?php if ($p['id_part'] == $ubah_servis['id_brg']) : ?>
+                                                                <option value="<?= $p['id_part']; ?>" selected><?= $p['nm_part']; ?></option>
                                                             <?php else : ?>
-                                                                <option value="<?= $b['id_brg']; ?>"><?= $b['nm_brg']; ?></option>
+                                                                <option value="<?= $p['id_part']; ?>"><?= $p['nm_part']; ?></option>
                                                             <?php endif; ?>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <?= form_error('id_brg', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                    <?= form_error('id_part', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm">
-                                                    <input type="hidden" class="form-control" id="nm_brg" name="nm_brg" value="<?= $ubah_servis['nm_brg']; ?>" readonly>
-                                                    <!-- <?= form_error('nm_brg', '<small class="text-danger pl-3">', '</small>'); ?> -->
+                                                    <input type="hidden" class="form-control" id="nm_part" name="nm_part" value="<?= $ubah_servis['nm_part']; ?>" readonly>
+                                                    <!-- <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Harga</label>
                                                 <div class="col-sm">
-                                                    <input type="number" class="form-control" id="harga" name="harga" value="<?= $ubah_servis['harga_brg']; ?>" readonly>
+                                                    <input type="number" class="form-control" id="harga" name="harga" value="<?= $ubah_servis['harga']; ?>" readonly>
                                                     <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Jumlah</label>
                                                 <div class="col-sm">
-                                                    <input type="number" class="form-control" id="jumlah" name="jumlah" min="1" placeholder="Masukkan jumlah barang" value="<?= $ubah_servis['jumlah_brg']; ?>">
-                                                    <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                    <input type="number" class="form-control" id="jml_part" name="jml_part" min="1" placeholder="Masukkan jumlah barang" value="<?= $ubah_servis['jml_part']; ?>">
+                                                    <?= form_error('jml_part', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
 

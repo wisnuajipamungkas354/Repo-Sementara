@@ -72,6 +72,7 @@ class ManajemenData_model extends CI_model
     {
         $this->db->delete('servis', ['id_pelanggan' => $id]);
         $this->db->delete('pelanggan', ['id_pelanggan' => $id]);
+        $this->db->delete('detail_servis', ['id_servis' => $id]);
     }
 
     public function search_servis()
@@ -100,7 +101,7 @@ class ManajemenData_model extends CI_model
     }
     // END DATA SERVICE //
 
-    // DATA BARANG //
+    // DATA PART //
     public function get_part()
     {
         return $this->db->get('part')->result_array();

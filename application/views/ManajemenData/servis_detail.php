@@ -29,7 +29,7 @@
                                                      <td>: <?= $detail_servis['tgl']; ?></td>
                                                  </tr>
                                                  <tr>
-                                                     <td class="font-weight-bold">ID Pelanggan : </td>
+                                                     <td class="font-weight-bold">ID Pelanggan</td>
                                                      <td>: <?= $detail_servis['id_pelanggan']; ?></td>
                                                  </tr>
                                                  <tr>
@@ -38,39 +38,19 @@
                                                  </tr>
                                                  <tr>
                                                      <td class="font-weight-bold"> No. Telepon</td>
-                                                     <td>: <?= $detail_servis['noTlp_pelanggan']; ?></td>
+                                                     <td>: <?= $detail_servis['no_hp']; ?></td>
                                                  </tr>
                                                  <tr>
                                                      <td class="font-weight-bold"> Merk Kendaraan</td>
-                                                     <td>: <?= $detail_servis['merk_kendaraan']; ?></td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td class="font-weight-bold"> No. Plat</td>
-                                                     <td>: <?= $detail_servis['no_plat']; ?></td>
+                                                     <td>: <?= $detail_servis['tipe_laptop']; ?></td>
                                                  </tr>
                                                  <tr>
                                                      <td class="font-weight-bold">Keluhan</td>
-                                                     <td>: <?= $detail_servis['keluhan']; ?></td>
+                                                     <td>: <?= $detail_servis['keluhan_awal']; ?></td>
                                                  </tr>
                                                  <tr>
-                                                     <td class="font-weight-bold">Nama Mekanik</td>
-                                                     <td>: <?= $detail_servis['nm_mekanik']; ?></td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td class="font-weight-bold">ID Barang</td>
-                                                     <td>: <?= $detail_servis['id_brg']; ?></td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td class="font-weight-bold">Nama Barang</td>
-                                                     <td>: <?= $detail_servis['nm_brg']; ?></td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td class="font-weight-bold">Harga</td>
-                                                     <td>: Rp <?= number_format($detail_servis['harga_brg'], 0, ',', '.'); ?></td>
-                                                 </tr>
-                                                 <tr>
-                                                     <td class="font-weight-bold">Jumlah</td>
-                                                     <td>: <?= $detail_servis['jumlah_brg']; ?></td>
+                                                     <td class="font-weight-bold">Nama Teknisi</td>
+                                                     <td>: <?= $detail_servis['nm_teknisi']; ?></td>
                                                  </tr>
                                                  <tr>
                                                      <td>

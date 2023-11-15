@@ -65,6 +65,34 @@
             }
         </style>
 
+        <!-- Script List Servis -->
+        <script>
+            const bListServis = document.querySelector('.blist-part');
+            const divListServis = document.querySelector('.flist-part');
+            const selectListServis = document.querySelector('.get-part');
+            const optionListServis = document.querySelector('.isi-part');
+
+            bListServis.addEventListener('click', function() {
+                const tagdiv = document.createElement('div');
+                const select = document.createElement('select');
+
+                const option = document.createElement('option');
+
+
+                const TextOption = document.createTextNode('');
+
+                tagdiv.setAttribute('class', 'col-sm');
+                select.setAttribute('id', 'nm_part');
+                select.setAttribute('name', 'nm_part');
+                select.setAttribute('class', 'form-control');
+
+                option.appendChild(TextOption);
+                select.appendChild(option);
+                tagdiv.appendChild(select);
+                divListServis.insertBefore(tagdiv, bListServis);
+            })
+        </script>
+
         <!-- Script Data tables -->
         <script>
             $(document).ready(function() {
@@ -119,7 +147,7 @@
             });
         </script>
 
-        <!-- Script data autofill -->
+        <!--Script data autofill-->
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#id_brg').change(function() {

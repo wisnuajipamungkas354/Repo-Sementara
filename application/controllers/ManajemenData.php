@@ -39,11 +39,10 @@ class ManajemenData extends CI_Controller
         $data['id_pelanggan'] = $this->ManajemenData_model->auto_idpelanggan();
 
         $this->form_validation->set_rules('nm_pelanggan', 'Nama Pelanggan', 'required');
-        $this->form_validation->set_rules('noTlp', 'No. Telepon', 'required');
-        $this->form_validation->set_rules('merk', 'Merk Kendaraan', 'required');
-        $this->form_validation->set_rules('no_plat', 'No. Plat', 'required');
-        $this->form_validation->set_rules('keluhan', 'Keluhan', 'required');
-        // $this->form_validation->set_rules('nm_mekanik', 'Nama Mekanik', 'required');
+        $this->form_validation->set_rules('no_hp', 'No. Telepon', 'required');
+        $this->form_validation->set_rules('tipe_laptop', 'Merk & Tipe Laptop', 'required');
+        $this->form_validation->set_rules('keluhan_awal', 'Keluhan', 'required');
+        $this->form_validation->set_rules('nm_teknisi', 'Nama Teknisi', 'required');
         // $this->form_validation->set_rules('id_brg', 'ID Barang', 'required');
         // $this->form_validation->set_rules('nm_brg', 'Nama Barang', 'required');
         // $this->form_validation->set_rules('harga', 'Harga', 'required');
@@ -74,7 +73,7 @@ class ManajemenData extends CI_Controller
             $pelanggan = [
                 'id_pelanggan' => $this->input->post('id_pelanggan'),
                 'nm_pelanggan' => $this->input->post('nm_pelanggan'),
-                'noTlp_pelanggan' => $this->input->post('noTlp')
+                'no_hp' => $this->input->post('no_hp')
             ];
             $this->db->insert('pelanggan', $pelanggan);
 
@@ -82,10 +81,10 @@ class ManajemenData extends CI_Controller
             $this->db->set('tgl', Date('Y-m-d H:i:s'));
             $this->db->set('id_pelanggan', $this->input->post('id_pelanggan'));
             $this->db->set('nm_pelanggan', $this->input->post('nm_pelanggan'));
-            $this->db->set('noTlp_pelanggan', $this->input->post('noTlp'));
-            $this->db->set('merk_kendaraan', $this->input->post('merk'));
-            $this->db->set('no_plat', $this->input->post('no_plat'));
-            $this->db->set('keluhan', $this->input->post('keluhan'));
+            $this->db->set('no_hp', $this->input->post('no_hp'));
+            $this->db->set('tipe_laptop', $this->input->post('tipe_laptop'));
+            $this->db->set('keluhan_awal', $this->input->post('keluhan_awal'));
+            $this->db->set('nm_teknisi', $this->input->post('nm_teknisi'));
             $this->db->insert('servis');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil ditambahkan!</div>');
@@ -115,34 +114,32 @@ class ManajemenData extends CI_Controller
             $pdf->Cell(90, 10, ' : ' . $servis['id_servis'], 0, 0);
             $pdf->Cell(30, 10, 'Tanggal', 0, 0);
             $pdf->Cell(30, 10, ' : ' . $servis['tgl'], 0, 1);
-            $pdf->Cell(30, 10, 'Nama Mekanik', 0, 0);
-            $pdf->Cell(50, 10, ' : ' . $servis['nm_mekanik'], 0, 1);
+            $pdf->Cell(30, 10, 'Nama Teknisi', 0, 0);
+            $pdf->Cell(50, 10, ' : ' . $servis['nm_teknisi'], 0, 1);
 
             $pdf->Ln(5);
             $pdf->Cell(30, 10, 'ID Pelanggan', 0, 0);
             $pdf->Cell(90, 10, ' : ' . $servis['id_pelanggan'], 0, 0);
             $pdf->Cell(30, 10, 'ID Part', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['id_brg'], 0, 1);
+            $pdf->Cell(30, 10, ' : ' . $servis['id_part'], 0, 1);
 
             $pdf->Cell(30, 10, 'Nama Pelanggan', 0, 0);
             $pdf->Cell(90, 10, ' : ' . $servis['nm_pelanggan'], 0, 0);
             $pdf->Cell(30, 10, 'Nama Part', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['nm_brg'], 0, 1);
+            $pdf->Cell(30, 10, ' : ' . $servis['nm_part'], 0, 1);
 
             $pdf->Cell(30, 10, 'No. Telepon', 0, 0);
-            $pdf->Cell(90, 10, ' : ' . $servis['noTlp_pelanggan'], 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['no_hp'], 0, 0);
             $pdf->Cell(30, 10, 'Harga', 0, 0);
-            $pdf->Cell(30, 10, ' : Rp ' . number_format($servis['harga_brg'], 0, ',', '.'), 0, 1);
+            $pdf->Cell(30, 10, ' : Rp ' . number_format($servis['harga'], 0, ',', '.'), 0, 1);
 
-            $pdf->Cell(30, 10, 'Merk Kendaraan', 0, 0);
-            $pdf->Cell(90, 10, ' : ' . $servis['merk_kendaraan'], 0, 0);
+            $pdf->Cell(30, 10, 'Merk & Tipe Laptop', 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['tipe_laptop'], 0, 0);
             $pdf->Cell(30, 10, 'Jumlah', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['jumlah_brg'], 0, 1);
+            $pdf->Cell(30, 10, ' : ' . $servis['jumlah_part'], 0, 1);
 
-            $pdf->Cell(30, 10, 'No. Plat', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['no_plat'], 0, 1);
             $pdf->Cell(30, 10, 'Keluhan', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['keluhan'], 0, 1);
+            $pdf->Cell(30, 10, ' : ' . $servis['keluhan_awal'], 0, 1);
 
             $pdf->Output('dokumen-servis-' . $servis['id_servis'] . '.pdf', 'I');
         } else {
@@ -160,11 +157,10 @@ class ManajemenData extends CI_Controller
         $data['part'] = $this->ManajemenData_model->get_part();
 
         $this->form_validation->set_rules('nm_pelanggan', 'Nama Pelanggan', 'required');
-        $this->form_validation->set_rules('noTlp', 'No. Telepon', 'required');
-        $this->form_validation->set_rules('merk', 'Merk Kendaraan', 'required');
-        $this->form_validation->set_rules('no_plat', 'No. Plat', 'required');
-        $this->form_validation->set_rules('keluhan', 'Keluhan', 'required');
-        $this->form_validation->set_rules('nm_mekanik', 'Nama Mekanik', 'required');
+        $this->form_validation->set_rules('no_hp', 'No. Telepon', 'required');
+        $this->form_validation->set_rules('tipe_laptop', 'Merk & Tipe Laptop', 'required');
+        $this->form_validation->set_rules('keluhan_awal', 'Keluhan Awal', 'required');
+        $this->form_validation->set_rules('nm_teknisi', 'Nama Teknisi', 'required');
         $this->form_validation->set_rules('id_part', 'Nama Part', 'required');
         // $this->form_validation->set_rules('nm_brg', 'Nama Barang', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required');
@@ -214,7 +210,7 @@ class ManajemenData extends CI_Controller
 
     public function servis_hapus($id)
     {
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         $row = mysqli_query($db, "DELETE FROM servis WHERE id_pelanggan = '$id'");
 
         if ($row) {
