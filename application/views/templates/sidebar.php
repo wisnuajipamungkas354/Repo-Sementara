@@ -1,32 +1,34 @@
-    <!-- Sidebar -->
-    <ul class="navbar-nav background sidebar sidebar-dark accordion" id="accordionSidebar">
-
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <img src="<?= base_url('assets/img/login/'); ?>ahayy-rounded.png" alt="logo" width="50">
-            </div>
+<!-- Sidebar -->
+<ul class="navbar-nav background sidebar sidebar-dark accordion" id="accordionSidebar">
+    
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand d-flex align-items-center justify-content-center cur">
+            <img src="<?= base_url('assets/img/login/'); ?>logo.png" alt="logo" width="50">
+        </div>
+        <div class="nama text-center font-weight-bold text-white text-uppercase sidebar-brand-text mx-3">
+            <?php 
+            $id_role = $this->session->userdata('id_role') ;
+            $username = $this->session->userdata('username') ;
+            $queryJabatan = "SELECT `user_role`.`nm_role` AS `jabatan`, `user`.`nm_karyawan` AS `nama`  
+            FROM `user`
+            JOIN `user_role`
+            ON `user`.`id_role` = `user_role`.`id_role`
+            WHERE `user`.`username` = '$username'";
+            $jabatan = $this->db->query($queryJabatan)->result_array()[0];
+            ?>
+            <?= $jabatan['nama']; ?>
+        </div>
         </a>
-
+        
         <!-- Divider -->
         <hr class="sidebar-divider">
         
         <!-- jabatan -->
-        <div class="text-center font-weight-bold text-white text-uppercase">
-            <?php 
-            $id_role = $this->session->userdata('id_role');
-            $queryJabatan = "SELECT *  
-            FROM `user`
-            JOIN `user_role`
-            ON `user`.`id_role` = `user_role`.`id_role`
-            WHERE `user`.`id_role` = $id_role";
-            $jabatan = $this->db->query($queryJabatan)->result_array()[$id_role - 1];
-            ?>
-            <?= $jabatan['nm_karyawan']; ?>
-        </div>
         <div class="text-center font-weight-bold text-uppercase">
-            <?= $jabatan['nm_role']; ?>
+            <?= $jabatan['jabatan']; ?>
         </div>
+
         <!-- Query Menu  -->
         <?php
         $queryMenu = "SELECT * 
