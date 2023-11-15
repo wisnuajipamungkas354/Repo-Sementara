@@ -9,7 +9,7 @@
     <meta name="author" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/login/'); ?>ahayy-rounded.png" />
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/login/'); ?>logo.png" />
 
     <title><?= $title; ?></title>
 
