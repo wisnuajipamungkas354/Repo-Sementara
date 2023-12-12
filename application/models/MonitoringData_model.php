@@ -23,12 +23,12 @@ class MonitoringData_model extends CI_model
     // DATA BARANG //
     public function get_barang()
     {
-        return $this->db->get('barang')->result_array();
+        return $this->db->get('part')->result_array();
     }
 
-    public function get_pemasok()
+    public function get_supplier()
     {
-        return $this->db->get('pemasok')->result_array();
+        return $this->db->get('supplier')->result_array();
     }
 
     public function auto_nofaktur()
@@ -82,7 +82,7 @@ class MonitoringData_model extends CI_model
             'id_part' => $this->input->post('id_part'),
             'nm_part' => $this->input->post('nm_part'),
             'stok' => $this->input->post('jumlah'),
-            'harga_part' => $this->input->post('harga')
+            'harga_part' => $this->input->post('harga_part')
         ];
         $this->db->where('id_part', $this->input->post('id_part'));
         $this->db->update('part', $part);

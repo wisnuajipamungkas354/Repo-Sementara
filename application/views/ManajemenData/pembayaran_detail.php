@@ -42,36 +42,24 @@
                                      </tr>
                                      <tr>
                                      <tr>
-                                         <td class="font-weight-bold">Merk Kendaraan</td>
-                                         <td>: <?= $detail_pembayaran['merk_kendaraan']; ?></td>
+                                         <td class="font-weight-bold">Merk & Tipe Laptop</td>
+                                         <td>: <?= $detail_pembayaran['tipe_laptop']; ?></td>
                                      </tr>
                                      <tr>
-                                         <td class="font-weight-bold">Keluhan</td>
-                                         <td>: <?= $detail_pembayaran['keluhan']; ?></td>
+                                         <td class="font-weight-bold">Keluhan Awal</td>
+                                         <td>: <?= $detail_pembayaran['keluhan_awal']; ?></td>
                                      </tr>
                                      <tr>
-                                         <td class="font-weight-bold">Nama Barang</td>
-                                         <td>: <?= $detail_pembayaran['nm_brg']; ?></td>
+                                         <td class="font-weight-bold">Nama Teknisi</td>
+                                         <td>: <?= $detail_pembayaran['nm_teknisi']; ?></td>
                                      </tr>
                                      <tr>
                                          <td class="font-weight-bold">Harga</td>
-                                         <td>: Rp <?= number_format($detail_pembayaran['harga_brg'], 0, ',', '.'); ?></td>
+                                         <td>: Rp <?= number_format($detail_pembayaran['total_harga'], 0, ',', '.'); ?></td>
                                      </tr>
                                      <tr>
-                                         <td class="font-weight-bold">Jumlah</td>
-                                         <td>: <?= $detail_pembayaran['jumlah_brg']; ?></td>
-                                     </tr>
-                                     <tr>
-                                         <td class="font-weight-bold">Subtotal barang</td>
-                                         <td>: Rp <?= number_format($detail_pembayaran['subtotal_brg'], 0, ',', '.'); ?></td>
-                                     </tr>
-                                     <tr>
-                                         <td class="font-weight-bold">Nama Mekanik</td>
-                                         <td>: <?= $detail_pembayaran['nm_mekanik']; ?></td>
-                                     </tr>
-                                     <tr>
-                                         <td class="font-weight-bold">Harga Jasa</td>
-                                         <td>: Rp <?= number_format($detail_pembayaran['harga_jasa'], 0, ',', '.'); ?></td>
+                                         <td class="font-weight-bold">Biaya Jasa</td>
+                                         <td>: Rp <?= number_format($detail_pembayaran['biaya_jasa'], 0, ',', '.'); ?></td>
                                      </tr>
                                      <tr>
                                          <td class="font-weight-bold">Total</td>

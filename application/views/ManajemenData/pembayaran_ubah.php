@@ -25,7 +25,7 @@
                                          <input type="text" class="form-control" id="no_nota" name="no_nota" value="<?= $ubah_pembayaran['no_nota']; ?>" readonly>
                                      </div>
                                  </div>
-                                 <input type="hidden" class="form-control" id="nm_admin" name="nm_admin" value="<?= $user['nama_pegawai']; ?>">
+                                 <input type="hidden" class="form-control" id="nm_admin" name="nm_admin" value="<?= $user['nm_karyawan']; ?>">
                                  <div class="form-group">
                                      <label>ID Servis</label>
                                      <?php
@@ -52,45 +52,33 @@
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Merk Kendaraan</label>
+                                     <label>Merk & Tipe Laptop</label>
                                      <div class="col-sm">
-                                         <input type="text" class="form-control" id="merk" name="merk" value="<?= $ubah_pembayaran['merk_kendaraan']; ?>" readonly>
+                                         <input type="text" class="form-control" id="tipe_laptop" name="tipe_laptop" value="<?= $ubah_pembayaran['tipe_laptop']; ?>" readonly>
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Keluhan</label>
+                                     <label>Keluhan Awal</label>
                                      <div class="col-sm">
-                                         <input type="text" class="form-control" id="keluhan" name="keluhan" value="<?= $ubah_pembayaran['keluhan']; ?>" readonly>
+                                         <input type="text" class="form-control" id="keluhan_awal" name="keluhan_awal" value="<?= $ubah_pembayaran['keluhan_awal']; ?>" readonly>
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Nama Barang</label>
+                                     <label>Nama Teknisi</label>
                                      <div class="col-sm">
-                                         <input type="text" class="form-control" id="nm_brg" name="nm_brg" value="<?= $ubah_pembayaran['nm_brg']; ?>" readonly>
+                                         <input type="text" class="form-control" id="nm_teknisi" name="nm_teknisi" value="<?= $ubah_pembayaran['nm_teknisi']; ?>" readonly>
                                      </div>
                                  </div>
                                  <div class="form-group">
                                      <label>Harga</label>
                                      <div class="col-sm">
-                                         <input type="number" class="form-control" id="harga" name="harga" value="<?= $ubah_pembayaran['harga_brg']; ?>" readonly>
+                                         <input type="number" class="form-control" id="total_harga" name="total_harga" value="<?= $ubah_pembayaran['total_harga']; ?>" readonly>
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Jumlah</label>
+                                     <label>Biaya Jasa</label>
                                      <div class="col-sm">
-                                         <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?= $ubah_pembayaran['jumlah_brg']; ?>" readonly>
-                                     </div>
-                                 </div>
-                                 <div class="form-group">
-                                     <label>Nama Mekanik</label>
-                                     <div class="col-sm">
-                                         <input type="text" class="form-control" id="nm_mekanik" name="nm_mekanik" value="<?= $ubah_pembayaran['nm_mekanik']; ?>" readonly>
-                                     </div>
-                                 </div>
-                                 <div class="form-group">
-                                     <label>Harga Jasa</label>
-                                     <div class="col-sm">
-                                         <input type="number" class="form-control" id="jasa" name="jasa" value="<?= $ubah_pembayaran['harga_jasa']; ?>">
+                                         <input type="number" class="form-control" id="biaya_jasa" name="biaya_jasa" value="<?= $ubah_pembayaran['biaya_jasa']; ?>">
                                          <?= form_error('jasa', '<small class="text-danger pl-3">', '</small>'); ?>
                                      </div>
                                  </div>

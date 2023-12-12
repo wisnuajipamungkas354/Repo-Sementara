@@ -9,6 +9,19 @@ class ManajemenData_model extends CI_model
         return $this->db->get('servis')->result_array();
     }
 
+    public function get_detailServis($id)
+    {
+        return $this->db->get_where('detail_servis', ['id_servis' => $id])->result_array();
+    }
+
+    public function total_harga($id)
+    {
+        $this->db->select_sum('harga');
+        $this->db->from('detail_servis');
+        $this->db->where('id_servis', $id);
+        return $this->db->get()->result_array();
+    }
+
     public function get_servisId($id)
     {
         return $this->db->get_where('servis', ['id_servis' => $id])->row_array();
@@ -52,27 +65,35 @@ class ManajemenData_model extends CI_model
             'no_hp' => $this->input->post('no_hp'),
             'tipe_laptop' => $this->input->post('tipe_laptop'),
             'keluhan_awal' => $this->input->post('keluhan_awal'),
-            'nm_teknisi' => $this->input->post('nm_teknisi')
+            'nm_teknisi' => $this->input->post('nm_teknisi'),
+            'total_harga' => $this->input->post('total_harga')
         ];
-
-        $detail_servis = [
-            'id_servis' => $this->input->post('id_servis'),
-            'id_part' => $this->input->post('id_part'),
-            'nm_part' => $this->input->post('nm_part'),
-            'harga' => $this->input->post('harga'),
-            'jml_part' => $this->input->post('jml_part')
-        ];
-
         $this->db->where('id_servis', $this->input->post('id_servis'));
         $this->db->update('servis', $servis);
-        $this->db->update('detail_servis', $detail_servis);
+
+        $idPart = $this->input->post('id_part[]');
+        $nmPart = $this->input->post('nm_part[]');
+        $harga = $this->input->post('harga[]');
+        $detailServis = array();
+        for ($i = 0; $i < count($idPart); $i++) {
+            $detailServis[$i] = array(
+                'id_servis' => $this->input->post('id_servis'),
+                'id_part' => $idPart[$i],
+                'nm_part' => $nmPart[$i],
+                'harga' => $harga[$i]
+            );
+        }
+        $this->db->where('id_servis', $this->input->post('id_servis'));
+        $this->db->delete('detail_servis');
+        $this->db->insert_batch('detail_servis', $detailServis);
     }
 
     public function hapus_servis($id)
     {
+        $idServis = $this->db->get_where('servis', ['id_pelanggan' => $id])->result_array();
+        $this->db->delete('detail_servis', ['id_servis' => $idServis[0]['id_servis']]);
         $this->db->delete('servis', ['id_pelanggan' => $id]);
         $this->db->delete('pelanggan', ['id_pelanggan' => $id]);
-        $this->db->delete('detail_servis', ['id_servis' => $id]);
     }
 
     public function search_servis()
@@ -99,6 +120,7 @@ class ManajemenData_model extends CI_model
         $this->db->where('id_servis', $servis);
         return $this->db->get('servis')->result();
     }
+
     // END DATA SERVICE //
 
     // DATA PART //
@@ -113,7 +135,7 @@ class ManajemenData_model extends CI_model
         $this->db->where('id_part', $part);
         return $this->db->get('part')->result();
     }
-    // END DATA BARANG //
+    // END DATA PART //
 
     // DATA PELANGGAN //
     public function auto_idpelanggan()
@@ -176,15 +198,12 @@ class ManajemenData_model extends CI_model
             'nm_admin' => $this->input->post('nm_admin'),
             'id_servis' => $this->input->post('id_servis'),
             'nm_pelanggan' => $this->input->post('nm_pelanggan'),
-            'merk_kendaraan' => $this->input->post('merk'),
-            'nm_brg' => $this->input->post('nm_brg'),
-            'harga_brg' => $this->input->post('harga'),
-            'jumlah_brg' => $this->input->post('jumlah'),
-            'subtotal_brg' => $this->input->post('harga') * $this->input->post('jumlah'),
-            'keluhan' => $this->input->post('keluhan'),
+            'tipe_laptop' => $this->input->post('tipe_laptop'),
+            'keluhan_awal' => $this->input->post('keluhan_awal'),
             'nm_teknisi' => $this->input->post('nm_teknisi'),
-            'harga_jasa' => $this->input->post('jasa'),
-            'total' => $this->input->post('harga') * $this->input->post('jumlah') + $this->input->post('jasa')
+            'total_harga' => $this->input->post('total_harga'),
+            'biaya_jasa' => $this->input->post('biaya_jasa'),
+            'total' => $this->input->post('total_harga') + $this->input->post('biaya_jasa')
         ];
         $this->db->where('no_nota', $this->input->post('no_nota'));
         $this->db->update('pembayaran', $pembayaran);
@@ -204,7 +223,7 @@ class ManajemenData_model extends CI_model
         $this->db->or_like('nm_pelanggan', $keyword);
         $this->db->or_like('merk_kendaraan', $keyword);
         $this->db->or_like('keluhan', $keyword);
-        $this->db->or_like('nm_mekanik', $keyword);
+        $this->db->or_like('nm_teknisi', $keyword);
         $this->db->or_like('nm_brg', $keyword);
         $this->db->or_like('harga_brg', $keyword);
         $this->db->or_like('jumlah_brg', $keyword);

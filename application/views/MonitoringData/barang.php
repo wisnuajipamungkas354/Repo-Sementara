@@ -53,13 +53,13 @@
                                             <?php foreach ($data_barang as $barang) : ?>
                                                 <tr>
                                                     <td><?= $i; ?></td>
-                                                    <td><?= $barang['id_brg']; ?></td>
-                                                    <td><?= $barang['nm_brg']; ?></td>
-                                                    <td>Rp <?= number_format($barang['harga_brg'], 0, ',', '.'); ?></td>
+                                                    <td><?= $barang['id_part']; ?></td>
+                                                    <td><?= $barang['nm_part']; ?></td>
+                                                    <td>Rp <?= number_format($barang['harga_part'], 0, ',', '.'); ?></td>
                                                     <td><?= $barang['stok']; ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="<?= base_url('MonitoringData/barang_ubah/'); ?><?= $barang['id_brg']; ?>" title="Ubah" class="btn btn-circle btn-warning my-1"><i class="fas fa-fw fa-edit"></i></a>
-                                                        <a href="<?= base_url('MonitoringData/barang_hapus/'); ?><?= $barang['id_brg']; ?>" title="Hapus" class="btn btn-danger btn-circle delete-barang"><i class="fas fa-fw fa-trash"></i></a>
+                                                        <a href="<?= base_url('MonitoringData/barang_ubah/'); ?><?= $barang['id_part']; ?>" title="Ubah" class="btn btn-circle btn-warning my-1"><i class="fas fa-fw fa-edit"></i></a>
+                                                        <a href="<?= base_url('MonitoringData/barang_hapus/'); ?><?= $barang['id_part']; ?>" title="Hapus" class="btn btn-danger btn-circle delete-barang"><i class="fas fa-fw fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 <?php $i++; ?>

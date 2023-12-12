@@ -23,9 +23,10 @@
 
     <!-- Custom styles for this page -->
     <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
     <link type="text/css" href="<?= base_url('assets/'); ?>css/jquery-ui.min.css" rel="stylesheet">
 
+    <!-- Bootstrap SelectPicker -->
+    <link rel="stylesheet" href="<?= base_url('assets/'); ?>dist/css/bootstrap-select.min.css">
 </head>
 
 <body id="page-top">

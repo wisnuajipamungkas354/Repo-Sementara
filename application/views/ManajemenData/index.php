@@ -9,9 +9,7 @@
 
                          <!-- Page Heading -->
                          <div class="card h4 mt-2 mb-4 border-bottom-success font-weight-bold text-secondary bg-light border-0 rounded-0">
-                             <div class="card-body text-dark">Riwayat Servis
-
-                             </div>
+                             <div class="card-body text-dark">Riwayat Servis</div>
                          </div>
 
                          <div class="row">

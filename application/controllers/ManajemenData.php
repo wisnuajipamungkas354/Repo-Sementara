@@ -34,15 +34,16 @@ class ManajemenData extends CI_Controller
         $data['title'] = 'Tambah data servis';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-        $data['part'] = $this->ManajemenData_model->get_part();
         $data['id_servis'] = $this->ManajemenData_model->auto_idservis();
         $data['id_pelanggan'] = $this->ManajemenData_model->auto_idpelanggan();
+        $data['part'] = $this->ManajemenData_model->get_part();
 
         $this->form_validation->set_rules('nm_pelanggan', 'Nama Pelanggan', 'required');
         $this->form_validation->set_rules('no_hp', 'No. Telepon', 'required');
         $this->form_validation->set_rules('tipe_laptop', 'Merk & Tipe Laptop', 'required');
         $this->form_validation->set_rules('keluhan_awal', 'Keluhan', 'required');
         $this->form_validation->set_rules('nm_teknisi', 'Nama Teknisi', 'required');
+        // $this->form_validation->set_rules('nm_part', 'List Rekomendasi Servis', 'required');
         // $this->form_validation->set_rules('id_brg', 'ID Barang', 'required');
         // $this->form_validation->set_rules('nm_brg', 'Nama Barang', 'required');
         // $this->form_validation->set_rules('harga', 'Harga', 'required');
@@ -55,21 +56,6 @@ class ManajemenData extends CI_Controller
             $this->load->view('ManajemenData/servis_tambah', $data);
             $this->load->view('templates/footer');
         } else {
-            // $servis = [
-            //     'id_servis' => $this->input->post('id_servis'),
-            //     'tgl' => Date('Y-m-d h:i:s'),
-            //     'id_pelanggan' => $this->input->post('id_pelanggan'),
-            //     'nm_pelanggan' => $this->input->post('nm_pelanggan'),
-            //     'noTlp_pelanggan' => $this->input->post('noTlp'),
-            //     'merk_kendaraan' => $this->input->post('merk'),
-            //     'no_plat' => $this->input->post('no_plat'),
-            //     'keluhan' => $this->input->post('keluhan'),
-            //     'nm_mekanik' => $this->input->post('nm_mekanik'),
-            //     'id_brg' => $this->input->post('id_brg'),
-            //     'nm_brg' => $this->input->post('nm_brg'),
-            //     'harga_brg' => $this->input->post('harga'),
-            //     'jumlah_brg' => $this->input->post('jumlah')
-            // ];
             $pelanggan = [
                 'id_pelanggan' => $this->input->post('id_pelanggan'),
                 'nm_pelanggan' => $this->input->post('nm_pelanggan'),
@@ -77,6 +63,21 @@ class ManajemenData extends CI_Controller
             ];
             $this->db->insert('pelanggan', $pelanggan);
 
+            $idPart = $this->input->post('id_part[]');
+            $nmPart = $this->input->post('nm_part[]');
+            $harga = $this->input->post('harga[]');
+            $detailServis = array();
+            for ($i = 0; $i < count($idPart); $i++) {
+                $detailServis[$i] = array(
+                    'id_servis' => $this->input->post('id_servis'),
+                    'id_part' => $idPart[$i],
+                    'nm_part' => $nmPart[$i],
+                    'harga' => $harga[$i]
+                );
+            }
+            $this->db->insert_batch('detail_servis', $detailServis);
+
+            $biaya = array_sum($harga);
             $this->db->set('id_servis', $this->input->post('id_servis'));
             $this->db->set('tgl', Date('Y-m-d H:i:s'));
             $this->db->set('id_pelanggan', $this->input->post('id_pelanggan'));
@@ -85,6 +86,7 @@ class ManajemenData extends CI_Controller
             $this->db->set('tipe_laptop', $this->input->post('tipe_laptop'));
             $this->db->set('keluhan_awal', $this->input->post('keluhan_awal'));
             $this->db->set('nm_teknisi', $this->input->post('nm_teknisi'));
+            $this->db->set('total_harga', $biaya);
             $this->db->insert('servis');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil ditambahkan!</div>');
@@ -94,52 +96,55 @@ class ManajemenData extends CI_Controller
 
     public function servis_ekspor($id)
     {
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         if ($db->errno == 0) {
             $servis = $this->ManajemenData_model->get_servisId($id);
             $pdf = new FPDF('P', 'mm', 'Letter');
             $pdf->AddPage();
 
             $pdf->SetFont('Arial', 'B', 14);
-            $pdf->Cell(0, 10, 'DOKUMEN SERVIS', 0, 1, 'C');
-            $pdf->Cell(0, 5, 'AHAYY', 0, 1, 'C');
-            $pdf->Image('assets/img/login/ahayy-rounded.png', 10, 5, -300);
+            $pdf->Cell(0, 10, 'RIWAYAT SERVIS', 0, 1, 'C');
+            $pdf->Cell(0, 5, 'WISNU-TECH', 0, 1, 'C');
+            $pdf->Image('assets/img/login/ahayy-rounded.png', 10, 10, -300);
             $pdf->Cell(0, 7, '', 0, 1);
 
             $pdf->Line(10, 30, 200, 30);
             $pdf->Ln(5);
             $pdf->SetFont('Arial', '', 11);
 
+            $pdf->Cell(30, 10, 'ID Pelanggan', 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['id_pelanggan'], 0, 0);
             $pdf->Cell(30, 10, 'ID Servis', 0, 0,);
-            $pdf->Cell(90, 10, ' : ' . $servis['id_servis'], 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['id_servis'], 0, 1);
+            $pdf->Cell(30, 10, 'Nama Pelanggan', 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['nm_pelanggan'], 0, 0);
             $pdf->Cell(30, 10, 'Tanggal', 0, 0);
             $pdf->Cell(30, 10, ' : ' . $servis['tgl'], 0, 1);
+            $pdf->Cell(30, 10, 'No. Telepon', 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['no_hp'], 0, 0);
             $pdf->Cell(30, 10, 'Nama Teknisi', 0, 0);
             $pdf->Cell(50, 10, ' : ' . $servis['nm_teknisi'], 0, 1);
 
-            $pdf->Ln(5);
-            $pdf->Cell(30, 10, 'ID Pelanggan', 0, 0);
-            $pdf->Cell(90, 10, ' : ' . $servis['id_pelanggan'], 0, 0);
-            $pdf->Cell(30, 10, 'ID Part', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['id_part'], 0, 1);
+            // $pdf->Ln(5);
+            // $pdf->Cell(30, 10, ' : ' . $servis['id_part'], 0, 1);
 
-            $pdf->Cell(30, 10, 'Nama Pelanggan', 0, 0);
-            $pdf->Cell(90, 10, ' : ' . $servis['nm_pelanggan'], 0, 0);
-            $pdf->Cell(30, 10, 'Nama Part', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['nm_part'], 0, 1);
+            // $pdf->Cell(30, 10, ' : ' . $servis['nm_part'], 0, 1);
 
-            $pdf->Cell(30, 10, 'No. Telepon', 0, 0);
-            $pdf->Cell(90, 10, ' : ' . $servis['no_hp'], 0, 0);
-            $pdf->Cell(30, 10, 'Harga', 0, 0);
-            $pdf->Cell(30, 10, ' : Rp ' . number_format($servis['harga'], 0, ',', '.'), 0, 1);
+            // $pdf->Cell(30, 10, 'Harga', 0, 0);
+            // $pdf->Cell(30, 10, ' : Rp ' . number_format($servis['harga'], 0, ',', '.'), 0, 1);
 
-            $pdf->Cell(30, 10, 'Merk & Tipe Laptop', 0, 0);
-            $pdf->Cell(90, 10, ' : ' . $servis['tipe_laptop'], 0, 0);
-            $pdf->Cell(30, 10, 'Jumlah', 0, 0);
-            $pdf->Cell(30, 10, ' : ' . $servis['jumlah_part'], 0, 1);
+            $pdf->Cell(30, 10, 'Merk $ Tipe', 0, 0);
+            $pdf->Cell(90, 10, ' : ' . $servis['tipe_laptop'], 0, 1);
 
-            $pdf->Cell(30, 10, 'Keluhan', 0, 0);
+            $pdf->Cell(30, 10, 'Keluhan Awal', 0, 0);
             $pdf->Cell(30, 10, ' : ' . $servis['keluhan_awal'], 0, 1);
+
+            $pdf->Ln(5);
+            $pdf->Line(10, 90, 200, 90);
+            $pdf->Ln(5);
+
+            $pdf->Cell(30, 10, 'List Perbaikan & Biaya', 1, 1);
+            $pdf->Cell(30, 10, 'List Perbaikan & Biaya', 0, 0);
 
             $pdf->Output('dokumen-servis-' . $servis['id_servis'] . '.pdf', 'I');
         } else {
@@ -153,18 +158,20 @@ class ManajemenData extends CI_Controller
         $data['title'] = 'Ubah data servis';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+        // Menyimpan data2 dri model kedalam variabel $data yang selanjutnya bisa dipanggil dihalaman view
         $data['ubah_servis'] = $this->ManajemenData_model->get_servisId($id);
         $data['part'] = $this->ManajemenData_model->get_part();
+        $data['detail_servis'] = $this->ManajemenData_model->get_detailServis($id);
+        $data['total_harga'] = $this->ManajemenData_model->total_harga($id);
 
         $this->form_validation->set_rules('nm_pelanggan', 'Nama Pelanggan', 'required');
         $this->form_validation->set_rules('no_hp', 'No. Telepon', 'required');
         $this->form_validation->set_rules('tipe_laptop', 'Merk & Tipe Laptop', 'required');
         $this->form_validation->set_rules('keluhan_awal', 'Keluhan Awal', 'required');
         $this->form_validation->set_rules('nm_teknisi', 'Nama Teknisi', 'required');
-        $this->form_validation->set_rules('id_part', 'Nama Part', 'required');
-        // $this->form_validation->set_rules('nm_brg', 'Nama Barang', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required');
-        $this->form_validation->set_rules('jumlah', 'Jumlah Part', 'required');
+        // $this->form_validation->set_rules('id_part', 'Nama Part', 'required');
+        // $this->form_validation->set_rules('harga', 'Harga', 'required');
+        // $this->form_validation->set_rules('jumlah', 'Jumlah Part', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -173,18 +180,18 @@ class ManajemenData extends CI_Controller
             $this->load->view('ManajemenData/servis_ubah', $data);
             $this->load->view('templates/footer');
         } else {
-            $id_part = $this->input->post('id_part');
-            $jumlah = $this->input->post('jumlah');
-            $query = $this->db->get_where('part', ['id_part' => $id_part])->row_array();
+            // $id_part = $this->input->post('id_part');
+            // $jumlah = $this->input->post('jumlah');
+            // $query = $this->db->get_where('part', ['id_part' => $id_part])->row_array();
 
-            if ($jumlah > $query['stok']) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal, jumlah part melampaui ketersediaan!</div>');
-                redirect('ManajemenData');
-            } else {
-                $this->ManajemenData_model->ubah_servis();
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil diperbarui!</div>');
-                redirect('ManajemenData');
-            }
+            // if ($jumlah > $query['stok']) {
+            //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal, jumlah part melampaui ketersediaan!</div>');
+            //     redirect('ManajemenData');
+            // } else {
+            $this->ManajemenData_model->ubah_servis();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil diperbarui!</div>');
+            redirect('ManajemenData');
+            // }
         }
     }
 
@@ -193,9 +200,11 @@ class ManajemenData extends CI_Controller
         $data['title'] = 'Detail data servis';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-        $data['detail_servis'] = $this->ManajemenData_model->get_servisId($id);
+        $data['riwayat_servis'] = $this->ManajemenData_model->get_servisId($id);
+        $data['detail_servis'] = $this->ManajemenData_model->get_detailServis($id);
+        $data['total_harga'] = $this->ManajemenData_model->total_harga($id);
 
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         if ($db->errno == 0) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -210,17 +219,9 @@ class ManajemenData extends CI_Controller
 
     public function servis_hapus($id)
     {
-        $db = new mysqli("localhost", "root", "", "db_servis");
-        $row = mysqli_query($db, "DELETE FROM servis WHERE id_pelanggan = '$id'");
-
-        if ($row) {
-            $this->db->delete('pelanggan', ['id_pelanggan' => $id]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis telah terhapus!</div>');
-            redirect('ManajemenData');
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal! Data ini terpakai pada Data Pembayaran.</div>');
-            redirect('ManajemenData');
-        }
+        $this->ManajemenData_model->hapus_servis($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil dihapus!</div>');
+        redirect('ManajemenData');
     }
     // END DATA SERVICE //
 
@@ -251,11 +252,9 @@ class ManajemenData extends CI_Controller
         $data['no_nota'] = $this->ManajemenData_model->auto_nonota();
 
         $this->form_validation->set_rules('id_servis', 'ID Servis', 'required');
-        $this->form_validation->set_rules('nm_mekanik', 'Nama Mekanik', 'required');
-        $this->form_validation->set_rules('nm_part', 'Nama Part', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required');
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim');
-        $this->form_validation->set_rules('jasa', 'Harga Jasa', 'required|trim');
+        // $this->form_validation->set_rules('nm_teknisi', 'Nama Teknisi', 'required');
+        // $this->form_validation->set_rules('nm_part', 'Nama Part', 'required');
+        $this->form_validation->set_rules('biaya_jasa', 'Biaya Jasa', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -270,15 +269,12 @@ class ManajemenData extends CI_Controller
                 'nm_admin' => $this->input->post('nm_admin'),
                 'id_servis' => $this->input->post('id_servis'),
                 'nm_pelanggan' => $this->input->post('nm_pelanggan'),
-                'merk_kendaraan' => $this->input->post('merk'),
-                'nm_brg' => $this->input->post('nm_brg'),
-                'harga_brg' => $this->input->post('harga'),
-                'jumlah_brg' => $this->input->post('jumlah'),
-                'subtotal_brg' => $this->input->post('harga') * $this->input->post('jumlah'),
-                'keluhan' => $this->input->post('keluhan'),
-                'nm_mekanik' => $this->input->post('nm_mekanik'),
-                'harga_jasa' => $this->input->post('jasa'),
-                'total' => $this->input->post('harga') * $this->input->post('jumlah') + $this->input->post('jasa')
+                'tipe_laptop' => $this->input->post('tipe_laptop'),
+                'keluhan_awal' => $this->input->post('keluhan_awal'),
+                'nm_teknisi' => $this->input->post('nm_teknisi'),
+                'total_harga' => $this->input->post('total_harga'),
+                'biaya_jasa' => $this->input->post('biaya_jasa'),
+                'total' => $this->input->post('total_harga') + $this->input->post('biaya_jasa')
             ];
             $this->db->insert('pembayaran', $pembayaran);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Pembayaran berhasil ditambahkan!</div>');
@@ -288,7 +284,7 @@ class ManajemenData extends CI_Controller
 
     public function pembayaran_ekspor($id)
     {
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         if ($db->errno == 0) {
             $pembayaran = $this->ManajemenData_model->get_nonota($id);
             $pdf = new FPDF('P', 'mm', 'Letter');
@@ -300,7 +296,7 @@ class ManajemenData extends CI_Controller
             $pdf->Cell(130, 5, 'STRUK PEMBAYARAN', 0, 1);
 
             $pdf->SetFont('Arial', '', 12);
-            $pdf->Cell(130, 5, 'AHAYY', 0, 0);
+            $pdf->Cell(130, 5, 'WISNU-TECH', 0, 0);
             $pdf->Cell(59, 5, '', 0, 1);
 
             $pdf->Line(15, 25, 200, 25);
@@ -315,8 +311,8 @@ class ManajemenData extends CI_Controller
             $pdf->Cell(25, 8, 'Tanggal', 0, 0);
             $pdf->Cell(34, 8, ' : ' . $pembayaran['tgl'], 0, 1);
 
-            $pdf->Cell(40, 5, 'Nama Mekanik', 0, 0);
-            $pdf->Cell(87, 5, ' : ' . $pembayaran['nm_mekanik'], 0, 0);
+            $pdf->Cell(40, 5, 'Nama Teknisi', 0, 0);
+            $pdf->Cell(87, 5, ' : ' . $pembayaran['nm_teknisi'], 0, 0);
             $pdf->Cell(25, 8, 'ID Servis', 0, 0);
             $pdf->Cell(34, 8, ' : ' . $pembayaran['id_servis'], 0, 1);
 
@@ -325,11 +321,11 @@ class ManajemenData extends CI_Controller
             $pdf->Cell(40, 8, 'Nama Pelanggan', 0, 0);
             $pdf->Cell(90, 8, ' : ' . $pembayaran['nm_pelanggan'], 0, 1);
 
-            $pdf->Cell(40, 8, 'Merk Kendaraan', 0, 0);
-            $pdf->Cell(90, 8, ' : ' . $pembayaran['merk_kendaraan'], 0, 1);
+            $pdf->Cell(40, 8, 'Merk & Tipe Laptop', 0, 0);
+            $pdf->Cell(90, 8, ' : ' . $pembayaran['tipe_laptop'], 0, 1);
 
-            $pdf->Cell(40, 8, 'Keluhan', 0, 0);
-            $pdf->Cell(90, 8, ' : ' . $pembayaran['keluhan'], 0, 1);
+            $pdf->Cell(40, 8, 'Keluhan Awal', 0, 0);
+            $pdf->Cell(90, 8, ' : ' . $pembayaran['keluhan_awal'], 0, 1);
 
             $pdf->Cell(189, 10, '', 0, 1);
 
@@ -377,7 +373,7 @@ class ManajemenData extends CI_Controller
         $data['ubah_pembayaran'] = $this->ManajemenData_model->get_nonota($id);
 
         $this->form_validation->set_rules('id_servis', 'ID Servis', 'required');
-        $this->form_validation->set_rules('jasa', 'Harga Jasa', 'required');
+        $this->form_validation->set_rules('biaya_jasa', 'Biaya Jasa', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -399,7 +395,7 @@ class ManajemenData extends CI_Controller
 
         $data['detail_pembayaran'] = $this->ManajemenData_model->get_nonota($id);
 
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         if ($db->errno == 0) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -418,7 +414,7 @@ class ManajemenData extends CI_Controller
         // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Pembayaran telah terhapus!</div>');
         // redirect('ManajemenData/pembayaran');
 
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         $row = mysqli_query($db, "DELETE FROM pembayaran WHERE no_nota = '$id'");
 
         if ($row) {
@@ -494,7 +490,7 @@ class ManajemenData extends CI_Controller
             $this->load->view('ManajemenData/laporan_ubah', $data);
             $this->load->view('templates/footer');
         } else {
-            $db = new mysqli("localhost", "root", "", "db_bengkel");
+            $db = new mysqli("localhost", "root", "", "db_servis");
             if ($db->errno == 0) {
                 $this->ManajemenData_model->ubah_laporan();
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Laporan berhasil diperbarui!</div>');
@@ -508,7 +504,7 @@ class ManajemenData extends CI_Controller
 
     public function laporan_hapus($id)
     {
-        $db = new mysqli("localhost", "root", "", "db_bengkel");
+        $db = new mysqli("localhost", "root", "", "db_servis");
         if ($db->errno == 0) {
             $this->ManajemenData_model->hapus_laporan($id);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Laporan telah terhapus!</div>');
@@ -538,15 +534,14 @@ class ManajemenData extends CI_Controller
     {
         $servis = $this->input->post('id_servis');
         $result = $this->ManajemenData_model->get_servisList($servis);
+
         foreach ($result as $row) {
             $data = [
                 'nm_pelanggan' => $row->nm_pelanggan,
-                'merk' => $row->merk_kendaraan,
-                'keluhan' => $row->keluhan,
-                'nm_brg' => $row->nm_brg,
-                'harga_brg' => $row->harga_brg,
-                'jumlah' => $row->jumlah_brg,
-                'mekanik' => $row->nm_mekanik,
+                'tipe_laptop' => $row->tipe_laptop,
+                'keluhan_awal' => $row->keluhan_awal,
+                'teknisi' => $row->nm_teknisi,
+                'total_harga' => $row->total_harga
             ];
         }
         echo json_encode($data);

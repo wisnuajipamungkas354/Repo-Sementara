@@ -54,6 +54,11 @@
         <script src="<?= base_url('assets/'); ?>js/promise-polyfill.js"></script>
         <script src="<?= base_url('assets/'); ?>js/js-delete-sweetAlert.js"></script>
 
+        <!-- Bootstrap SelectPicker -->
+        <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?= base_url('assets/'); ?>dist/js/bootstrap-select.min.js"></script>
+        <script src="<?= base_url('assets/'); ?>dist/js/i18n/defaults-en_US.js"></script>
+
         <!-- Page level plugins -->
         <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -65,32 +70,38 @@
             }
         </style>
 
-        <!-- Script List Servis -->
+        <!-- Script CRUD Riwayat Servis -->
         <script>
-            const bListServis = document.querySelector('.blist-part');
-            const divListServis = document.querySelector('.flist-part');
-            const selectListServis = document.querySelector('.get-part');
-            const optionListServis = document.querySelector('.isi-part');
+            $(document).ready(function() {
+                $('.selectpicker').selectpicker();
+                $('#tombol-add').on('click', function() {
+                    $tableBody = $('table tbody');
+                    $idPart = $('#part option:selected').data('id');
+                    $nmPart = $('#part').val();
+                    $harga = $('#part option:selected').data('harga')
 
-            bListServis.addEventListener('click', function() {
-                const tagdiv = document.createElement('div');
-                const select = document.createElement('select');
+                    markup = "<tr><th scope='row' style='width:15%;'><input type='text' class='form-control-plaintext' name='id_part[]' value='" + $idPart + "' readonly>" + "</th><td style='width:65%;'><input type='text' class='form-control-plaintext' name='nm_part[]' value='" + $nmPart + "' readonly>" + "</td><td style='width:15%;'><input type='text' class='form-control-plaintext val-harga' name='harga[]' style='text-align:right;' value='" + $harga + "' readonly>" + "</td><td style='width:5%;'><button type='button' class='delete btn btn-sm btn-danger btn-circle'><i class='fas fa-fw fa-trash'></i></button></td></tr>";
+                    $tableBody.append(markup);
+                });
 
-                const option = document.createElement('option');
+                var totalHarga = 0
+                $('.val-harga').each(function() {
+                    totalHarga = totalHarga + parseInt($(this).val());
+                    $('#total_sum_value').val(totalHarga);
+                })
 
+                $('#tombol-add').click(function() {
+                    totalHarga = totalHarga + parseInt($('.val-harga:last').val());
+                    $('#total_sum_value').val(totalHarga);
+                })
 
-                const TextOption = document.createTextNode('');
+                $('table').on('click', '.delete', function() {
+                    totalHarga = totalHarga - parseInt($(this).closest('tr').find('.val-harga').val());
+                    $('#total_sum_value').val(totalHarga);
+                    $(this).closest('tr').remove();
+                });
 
-                tagdiv.setAttribute('class', 'col-sm');
-                select.setAttribute('id', 'nm_part');
-                select.setAttribute('name', 'nm_part');
-                select.setAttribute('class', 'form-control');
-
-                option.appendChild(TextOption);
-                select.appendChild(option);
-                tagdiv.appendChild(select);
-                divListServis.insertBefore(tagdiv, bListServis);
-            })
+            });
         </script>
 
         <!-- Script Data tables -->
@@ -165,6 +176,7 @@
                     });
                 });
             });
+            // fungsi pembayaran
             $(document).ready(function() {
                 $('#id_servis').change(function() {
                     var servis = $(this).val();
@@ -176,12 +188,12 @@
                         dataType: 'json',
                         success: function(data) {
                             $('#nm_pelanggan').val(data.nm_pelanggan);
-                            $('#merk').val(data.merk);
-                            $('#keluhan').val(data.keluhan);
-                            $('#nm_brg').val(data.nm_brg);
-                            $('#harga').val(data.harga_brg);
-                            $('#jumlah').val(data.jumlah);
-                            $('#nm_mekanik').val(data.mekanik);
+                            $('#tipe_laptop').val(data.tipe_laptop);
+                            $('#keluhan_awal').val(data.keluhan_awal);
+                            $('#nm_teknisi').val(data.teknisi);
+                            $('#total_harga').val(data.total_harga);
+                            // $('.nm_part').val(data.nm_part);
+                            // $('.total-harga').val(data.totalHarga);
                         }
                     });
                 });
@@ -202,16 +214,16 @@
                 });
             });
             $(document).ready(function() {
-                $('#id_pegawai').change(function() {
-                    var pegawai = $(this).val();
+                $('#id_karyawan').change(function() {
+                    var karyawan = $(this).val();
                     $.ajax({
-                        url: "<?= base_url('ManajemenPegawai/pegawai_list'); ?>",
+                        url: "<?= base_url('ManajemenKaryawan/karyawan_list'); ?>",
                         type: "POST",
-                        data: "id_pegawai=" + pegawai,
+                        data: "id_karyawan=" + karyawan,
                         async: true,
                         dataType: 'json',
                         success: function(data) {
-                            $('#nm_pegawai').val(data.nama);
+                            $('#nm_karyawan').val(data.nama);
                         }
                     });
                 });

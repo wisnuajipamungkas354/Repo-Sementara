@@ -77,52 +77,35 @@
                                          <?= form_error('nm_teknisi', '<small class="text-danger pl-3">', '</small>'); ?>
                                      </div>
                                  </div>
-                                 <div class="form-group flist-part">
-
+                                 <div class="form-group">
                                      <label>List Rekomendasi Servis</label>
-                                     <ul>
-                                         <li>Software</li>
-                                         <?php
-                                            $query = "SELECT * FROM part WHERE kategori = 'Software'";
-                                            $software = $this->db->query($query)->result_array();
-                                            ?>
-                                         <div class="col-sm">
-                                             <select class="form-control get-part" id="nm_part" name="nm_part">
-                                                 <option value="" class="isi-part">Pilih Part/Kerusakan</option>
-                                                 <?php foreach ($software as $part) : ?>
-                                                     <option value="<?= $part['nm_part']; ?>"><?= $part['nm_part']; ?></option>
-                                                 <?php endforeach; ?>
-                                             </select>
-                                             <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?>
-                                         </div>
-                                         <li>Hardware</li>
-                                         <?php
-                                            $query = "SELECT * FROM part WHERE kategori = 'Hardware'";
-                                            $hardware = $this->db->query($query)->result_array();
-                                            ?>
-                                         <div class="col-sm">
-                                             <select class="form-control get-part" id="nm_part" name="nm_part">
-                                                 <option value="" class="isi-part">Pilih Part/Kerusakan</option>
-                                                 <?php foreach ($hardware as $part) : ?>
-                                                     <option value="<?= $part['nm_part']; ?>"><?= $part['nm_part']; ?></option>
-                                                 <?php endforeach; ?>
-                                             </select>
-                                             <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?>
-                                         </div>
-                                         <li>Motherboard</li>
-                                         <div class="col-sm">
-                                             <select class="form-control get-part" id="nm_part" name="nm_part">
-                                                 <option value="" class="isi-part">Pilih Part/Kerusakan</option>
-                                                 <?php foreach ($result as $part) : ?>
-                                                     <option value="<?= $part['nm_part']; ?>"><?= $part['nm_part']; ?></option>
-                                                 <?php endforeach; ?>
-                                             </select>
-                                             <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?>
-                                         </div>
-                                     </ul>
+                                     <table class="table table-responsive-sm">
+                                         <thead class="thead-dark">
+                                             <tr>
+                                                 <th scope="col">Id Part</th>
+                                                 <th scope="col">Nama Part</th>
+                                                 <th scope="col" style="text-align: right;">Biaya</th>
+                                                 <th scope="col"></th>
+                                             </tr>
+                                         </thead>
+                                         <tbody>
 
-                                     <button type="button" class="blist-part">Tambah Item</button>
+                                         </tbody>
+                                     </table>
+                                     <hr>
+                                     <div class="col-sm">
+                                         <select class="selectpicker form-control" id="part" name="part" data-live-search="true" data-size="5">
+                                             <option value="">Pilih Part Yang Akan Diganti</option>
+                                             <?php foreach ($part as $p) : ?>
+                                                 <option data-id="<?= $p['id_part'] ?>" data-harga="<?= $p['harga_part'] ?>" value="<?= $p['nm_part']; ?>"><?= $p['nm_part']; ?></option>
+                                             <?php endforeach; ?>
+                                         </select>
+                                         <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?>
+                                         <br>
+                                         <button type="button" class="btn btn-sm btn-primary font-weight-bold my-2" id="tombol-add">Add Part</button>
+                                     </div>
                                  </div>
+                                 <hr>
                                  <a href="<?= base_url('ManajemenData'); ?>" title="Kembali ke halaman Servis" class="btn btn-sm btn-secondary font-weight-bold mt-3">Kembali</a>
                                  <button type="submit" class="btn btn-sm btn-success font-weight-bold ml-2 mt-3">Simpan</button>
                              </div>

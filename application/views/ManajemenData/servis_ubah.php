@@ -81,40 +81,57 @@
                                                     <?= form_error('nm_teknisi', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Nama Barang</label>
-                                                <div class="col-sm">
-                                                    <select type="text" class="form-control" id="id_part" name="id_part">
-                                                        <option value="">Pilih barang</option>
-                                                        <?php foreach ($part as $p) : ?>
-                                                            <?php if ($p['id_part'] == $ubah_servis['id_brg']) : ?>
-                                                                <option value="<?= $p['id_part']; ?>" selected><?= $p['nm_part']; ?></option>
-                                                            <?php else : ?>
-                                                                <option value="<?= $p['id_part']; ?>"><?= $p['nm_part']; ?></option>
-                                                            <?php endif; ?>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                    <?= form_error('id_part', '<small class="text-danger pl-3">', '</small>'); ?>
+
+                                            <div class="col-sm">
+                                                <div class="form-group">
+                                                    <h6 class="font-weight-bold mt-4">List Rekomendasi Servis</h6>
+                                                    <table class="table table-responsive-sm" id="upTable">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th scope="col">Id Part</th>
+                                                                <th scope="col">Nama Part</th>
+                                                                <th scope="col" style="text-align: right;">Biaya</th>
+                                                                <th scope="col"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($detail_servis as $ds) : ?>
+                                                                <tr>
+                                                                    <th scope="row" style="width:15%;">
+                                                                        <input type="text" class="form-control-plaintext" name="id_part[]" value="<?= $ds['id_part'] ?>" readonly>
+                                                                    </th>
+                                                                    <td style="width:65%;">
+                                                                        <input type="text" class="form-control-plaintext" name="nm_part[]" value="<?= $ds['nm_part'] ?>" readonly>
+                                                                    </td>
+                                                                    <td style="width:15%;">
+                                                                        <input type="text" class="form-control-plaintext val-harga" name="harga[]" style="text-align:right;" value="<?= $ds['harga'] ?>" readonly>
+                                                                    </td>
+                                                                    <td style="width:5%;">
+                                                                        <button type="button" id="tombol-hapus" class="delete btn btn-sm btn-danger btn-circle">
+                                                                            <i class="fas fa-fw fa-trash"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach ?>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-sm">
-                                                    <input type="hidden" class="form-control" id="nm_part" name="nm_part" value="<?= $ubah_servis['nm_part']; ?>" readonly>
-                                                    <!-- <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?> -->
-                                                </div>
+                                            <div class="col-sm">
+                                                <select class="selectpicker form-control" id="part" name="part" data-live-search="true" data-size="5">
+                                                    <option value="">Pilih Part Yang Akan Diganti</option>
+                                                    <?php foreach ($part as $p) : ?>
+                                                        <option data-id="<?= $p['id_part'] ?>" data-harga="<?= $p['harga_part'] ?>" value="<?= $p['nm_part']; ?>"><?= $p['nm_part']; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                                <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                <br>
+                                                <button type="button" class="btn btn-sm btn-primary font-weight-bold my-2" id="tombol-add">Add Part</button>
                                             </div>
                                             <div class="form-group">
-                                                <label>Harga</label>
+                                                <label>Total Biaya</label>
                                                 <div class="col-sm">
-                                                    <input type="number" class="form-control" id="harga" name="harga" value="<?= $ubah_servis['harga']; ?>" readonly>
-                                                    <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Jumlah</label>
-                                                <div class="col-sm">
-                                                    <input type="number" class="form-control" id="jml_part" name="jml_part" min="1" placeholder="Masukkan jumlah barang" value="<?= $ubah_servis['jml_part']; ?>">
-                                                    <?= form_error('jml_part', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                    <input type="text" class="form-control" id="total_sum_value" name="total_harga" value="" readonly>
                                                 </div>
                                             </div>
 

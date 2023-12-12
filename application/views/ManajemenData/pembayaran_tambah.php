@@ -25,7 +25,7 @@
                                          <input type="text" class="form-control" id="no_nota" name="no_nota" value="<?= $no_nota; ?>" readonly>
                                      </div>
                                  </div>
-                                 <input type="hidden" class="form-control" id="nm_admin" name="nm_admin" value="<?= $user['nama_pegawai']; ?>">
+                                 <input type="hidden" class="form-control" id="nm_admin" name="nm_admin" value="<?= $user['nm_karyawan']; ?>">
                                  <div class="form-group">
                                      <label>ID Servis</label>
                                      <?php
@@ -49,49 +49,35 @@
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Merk Kendaraan</label>
+                                     <label>Merk & Tipe Laptop</label>
                                      <div class="col-sm">
-                                         <input type="text" class="form-control" id="merk" name="merk" readonly>
+                                         <input type="text" class="form-control" id="tipe_laptop" name="tipe_laptop" readonly>
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Keluhan</label>
+                                     <label>Keluhan Awal</label>
                                      <div class="col-sm">
-                                         <input type="text" class="form-control" id="keluhan" name="keluhan" readonly>
+                                         <input type="text" class="form-control" id="keluhan_awal" name="keluhan_awal" readonly>
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Nama Barang</label>
+                                     <label>Nama Teknisi</label>
                                      <div class="col-sm">
-                                         <input type="text" class="form-control" id="nm_brg" name="nm_brg" readonly>
-                                         <?= form_error('nm_brg', '<small class="text-danger pl-3">', '</small>'); ?>
+                                         <input type="text" class="form-control" id="nm_teknisi" name="nm_teknisi" readonly>
+                                         <?= form_error('nm_teknisi', '<small class="text-danger pl-3">', '</small>'); ?>
                                      </div>
                                  </div>
                                  <div class="form-group">
                                      <label>Harga</label>
                                      <div class="col-sm">
-                                         <input type="number" class="form-control" id="harga" name="harga" readonly>
+                                         <input type="number" class="form-control" id="total_harga" name="total_harga" readonly>
                                          <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
                                      </div>
                                  </div>
                                  <div class="form-group">
-                                     <label>Jumlah</label>
+                                     <label>Biaya Jasa</label>
                                      <div class="col-sm">
-                                         <input type="number" class="form-control" id="jumlah" name="jumlah" readonly>
-                                         <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>'); ?>
-                                     </div>
-                                 </div>
-                                 <div class="form-group">
-                                     <label>Nama Mekanik</label>
-                                     <div class="col-sm">
-                                         <input type="text" class="form-control" id="nm_mekanik" name="nm_mekanik" readonly>
-                                         <?= form_error('nm_mekanik', '<small class="text-danger pl-3">', '</small>'); ?>
-                                     </div>
-                                 </div>
-                                 <div class="form-group">
-                                     <label>Harga Jasa</label>
-                                     <div class="col-sm">
-                                         <input type="number" class="form-control" id="jasa" name="jasa" min="1" max="9999999999" placeholder="Masukkan harga jasa">
+                                         <input type="number" class="form-control" id="biaya_jasa" name="biaya_jasa" min="1" max="9999999999" placeholder="Masukkan harga jasa">
                                          <?= form_error('jasa', '<small class="text-danger pl-3">', '</small>'); ?>
                                      </div>
                                  </div>

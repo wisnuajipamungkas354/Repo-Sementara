@@ -21,35 +21,35 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Pemasok</label>
+                                        <label>Supplier</label>
                                         <div class="col-sm">
-                                            <select class="form-control" id="id_pemasok" name="id_pemasok">
-                                                <option value="">Pilih Pemasok</option>
-                                                <?php foreach ($data_pemasok as $pemasok) : ?>
-                                                    <option value="<?= $pemasok['id_pemasok']; ?>"><?= $pemasok['id_pemasok']; ?> - <?= $pemasok['nm_pemasok']; ?></option>
+                                            <select class="form-control" id="id_supplier" name="id_supplier">
+                                                <option value="">Pilih Supplier</option>
+                                                <?php foreach ($data_supplier as $supplier) : ?>
+                                                    <option value="<?= $supplier['id_supplier']; ?>"><?= $supplier['id_supplier']; ?> - <?= $supplier['nm_supplier']; ?></option>
                                                 <?php endforeach; ?>
-                                            </select> <?= form_error('id_pemasok', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            </select> <?= form_error('id_supplier', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>ID Barang</label>
                                         <div class="col-sm">
-                                            <input type="text" class="form-control" id="id_brg" name="id_brg" value="<?= $id_brg; ?>" readonly>
-                                            <?= form_error('id_brg', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control" id="id_part" name="id_part" value="<?= $id_part; ?>" readonly>
+                                            <?= form_error('id_part', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Nama Barang</label>
                                         <div class="col-sm">
-                                            <input type="text" class="form-control text-capitalize" id="nm_brg" name="nm_brg" maxlength="30" placeholder="Masukkan nama barang">
-                                            <?= form_error('nm_brg', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control text-capitalize" id="nm_part" name="nm_part" maxlength="30" placeholder="Masukkan nama barang">
+                                            <?= form_error('nm_part', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Harga</label>
                                         <div class="col-sm">
-                                            <input type="number" class="form-control" id="harga" name="harga" min="1" max="9999999999" placeholder="Masukkan harga barang">
-                                            <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="number" class="form-control" id="harga_part" name="harga_part" min="1" max="9999999999" placeholder="Masukkan harga barang">
+                                            <?= form_error('harga_part', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
