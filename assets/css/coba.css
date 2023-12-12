@@ -14,3 +14,13 @@
 .gelap{
     color: #15102D;
 }
+
+
+.zoom {
+   width: 100px;
+   height: 100px;
+}
+
+.cur{
+    cursor: none;
+}
