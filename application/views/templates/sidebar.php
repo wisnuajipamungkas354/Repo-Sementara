@@ -4,6 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand d-flex align-items-center justify-content-center cur">
+<<<<<<< HEAD
             <img src="<?= base_url('assets/img/login/'); ?>logo.png" alt="logo" width="50">
         </div>
     </a>
@@ -12,6 +13,15 @@
             <?php
             $id_role = $this->session->userdata('id_role');
             $username = $this->session->userdata('username');
+=======
+            <img src="<?= base_url('assets/img/login/'); ?>ahayy-rounded.png" alt="logo" width="50">
+        </div>
+        <div class="nama text-center font-weight-bold text-white text-uppercase sidebar-brand-text mx-3">
+            <?php
+            $id_role = $this->session->userdata('id_role');
+            $username = $this->session->userdata('username');
+
+>>>>>>> bc554a87eba2aca82d971e0d075e1838c56e6563
             $queryJabatan = "SELECT `user_role`.`nm_role` AS `jabatan`, `user`.`nm_karyawan` AS `nama`  
             FROM `user`
             JOIN `user_role`
@@ -20,9 +30,14 @@
             $jabatan = $this->db->query($queryJabatan)->result_array()[0];
             ?>
             <?= $jabatan['nama']; ?>
+<<<<<<< HEAD
         </h6>
     </div>
 
+=======
+        </div>
+    </a>
+>>>>>>> bc554a87eba2aca82d971e0d075e1838c56e6563
 
     <!-- Divider -->
     <hr class="sidebar-divider">
