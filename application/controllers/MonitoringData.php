@@ -130,22 +130,9 @@ class MonitoringData extends CI_Controller
 
     public function barang_hapus($id)
     {
-        $db = new mysqli("localhost", "root", "", "db_servis");
-        $faktur = mysqli_query($db, "DELETE FROM faktur WHERE id_part = '$id'");
-
-        if ($faktur) {
-            $barang = mysqli_query($db, "DELETE FROM part WHERE id_part = '$id'");
-            if ($barang) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Barang telah terhapus!</div>');
-                redirect('MonitoringData/barang');
-            } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal! Data ini terpakai pada Data Servis.</div>');
-                redirect('MonitoringData/barang');
-            }
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal!</div>');
-            redirect('MonitoringData/barang');
-        }
+        $this->MonitoringData_model->hapus_part($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Barang telah terhapus!</div>');
+        redirect('MonitoringData/barang');
     }
     // END DATA BARANG //
 }

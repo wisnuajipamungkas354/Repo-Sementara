@@ -107,10 +107,7 @@ class ManajemenData_model extends CI_model
         $this->db->or_like('tipe_laptop', $keyword);
         $this->db->or_like('keluhan_awal', $keyword);
         $this->db->or_like('nm_teknisi', $keyword);
-        $this->db->or_like('id_part', $keyword);
-        $this->db->or_like('nm_part', $keyword);
-        $this->db->or_like('harga', $keyword);
-        $this->db->or_like('jml_part', $keyword);
+        $this->db->or_like('total_harga', $keyword);
         return $this->db->get('servis')->result_array();
     }
 
@@ -221,13 +218,11 @@ class ManajemenData_model extends CI_model
         $this->db->or_like('tgl', $keyword);
         $this->db->or_like('id_servis', $keyword);
         $this->db->or_like('nm_pelanggan', $keyword);
-        $this->db->or_like('merk_kendaraan', $keyword);
-        $this->db->or_like('keluhan', $keyword);
+        $this->db->or_like('tipe_laptop', $keyword);
+        $this->db->or_like('keluhan_awal', $keyword);
         $this->db->or_like('nm_teknisi', $keyword);
-        $this->db->or_like('nm_brg', $keyword);
-        $this->db->or_like('harga_brg', $keyword);
-        $this->db->or_like('jumlah_brg', $keyword);
-        $this->db->or_like('subtotal_brg', $keyword);
+        $this->db->or_like('total_harga', $keyword);
+        $this->db->or_like('biaya_jasa', $keyword);
         $this->db->or_like('total', $keyword);
         return $this->db->get('pembayaran')->result_array();
     }

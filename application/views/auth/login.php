@@ -9,7 +9,7 @@
     <meta name="author" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/login/'); ?>logo.png" />
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/login/'); ?>ahayy-rounded.png" />
 
     <title><?= $title; ?></title>
 
@@ -40,13 +40,13 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="<?= base_url('assets/img/login/'); ?>bg-login.png" alt="image" width="410" height="auto">
+                                <img src="<?= base_url('assets/img/login/'); ?>bg-login3.jpg" alt="image" width="410" height="auto">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-3">
                                     <div class="text-center">
                                         <img src="<?= base_url('assets/img/login/'); ?>logo2.png" alt="avatar" width="150">
-                                        <h2 class="h5 text-dark mt-4 mb-3 text-monospace">Sistem Pengelolaan Servis<br>Wisnu-Tech</h2>
+                                        <h2 class="h5 text-dark mt-4 mb-3 text-monospace">SISTEM PENGELOLAAN SERVIS<br>WISNU-TECH</h2>
                                     </div>
                                     <?= $this->session->flashdata('message'); ?>
                                     <hr />

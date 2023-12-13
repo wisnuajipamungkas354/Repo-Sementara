@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/login/'); ?>logo.png" />
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/login/'); ?>logo2.png" />
 
     <title><?= $title; ?></title>
 
@@ -20,6 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/coba.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">

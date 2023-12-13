@@ -1,28 +1,17 @@
 <!-- Sidebar -->
 <ul class="navbar-nav background sidebar sidebar-dark accordion" id="accordionSidebar">
-<<<<<<< HEAD
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand d-flex align-items-center justify-content-center cur">
-            <img src="<?= base_url('assets/img/login/'); ?>ahayy-rounded.png" alt="logo" width="50">
-        </div>
-        <div class="nama text-center font-weight-bold text-white text-uppercase sidebar-brand-text mx-3">
-            <?php
-            $id_role = $this->session->userdata('id_role');
-            $username = $this->session->userdata('username');
-=======
-    
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand d-flex align-items-center justify-content-center cur">
             <img src="<?= base_url('assets/img/login/'); ?>logo.png" alt="logo" width="50">
         </div>
-        <div class="nama text-center font-weight-bold text-white text-uppercase sidebar-brand-text mx-3">
-            <?php 
-            $id_role = $this->session->userdata('id_role') ;
-            $username = $this->session->userdata('username') ;
->>>>>>> b8780e916041b1953d7dc323e935899323849b0f
+    </a>
+    <div class="nama text-center font-weight-bold text-white text-uppercase sidebar-brand-text mx-2">
+        <h6>
+            <?php
+            $id_role = $this->session->userdata('id_role');
+            $username = $this->session->userdata('username');
             $queryJabatan = "SELECT `user_role`.`nm_role` AS `jabatan`, `user`.`nm_karyawan` AS `nama`  
             FROM `user`
             JOIN `user_role`
@@ -31,36 +20,24 @@
             $jabatan = $this->db->query($queryJabatan)->result_array()[0];
             ?>
             <?= $jabatan['nama']; ?>
-        </div>
-<<<<<<< HEAD
-    </a>
+        </h6>
+    </div>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- jabatan -->
-    <div class="text-center font-weight-bold text-uppercase">
+    <div class="text-center font-italic text-uppercase text-white mb-3">
         <?= $jabatan['jabatan']; ?>
     </div>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
     <!-- Query Menu  -->
     <?php
     $queryMenu = "SELECT * 
-=======
-        </a>
-        
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-        
-        <!-- jabatan -->
-        <div class="text-center font-weight-bold text-uppercase">
-            <?= $jabatan['jabatan']; ?>
-        </div>
-
-        <!-- Query Menu  -->
-        <?php
-        $queryMenu = "SELECT * 
->>>>>>> b8780e916041b1953d7dc323e935899323849b0f
             FROM `user_menu` 
             JOIN `user_access`
             ON `user_menu`.`id_menu` = `user_access`.`id_menu`
