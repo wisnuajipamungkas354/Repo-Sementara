@@ -1,5 +1,5 @@
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex">
 
             <!-- Main Content -->
             <div id="content">
@@ -16,7 +16,7 @@
 
                     <div class="row">
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -118,7 +118,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -166,7 +166,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -190,7 +190,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card background2 shadow h-100 py-2">
+                            <div class="card bg-gradient-dark background2 shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -216,6 +216,3 @@
 
                 </div>
                 <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
