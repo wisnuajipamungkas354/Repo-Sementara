@@ -34,9 +34,3 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Content Wrapper -->
-        <!-- <div id="content-wrapper" class="d-flex flex-row"> -->
-
-        <!-- Main Content -->
-        <!-- <div id="content"> -->
