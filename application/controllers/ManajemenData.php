@@ -56,6 +56,7 @@ class ManajemenData extends CI_Controller
             $this->load->view('ManajemenData/servis_tambah', $data);
             $this->load->view('templates/footer');
         } else {
+
             $pelanggan = [
                 'id_pelanggan' => $this->input->post('id_pelanggan'),
                 'nm_pelanggan' => $this->input->post('nm_pelanggan'),
@@ -66,31 +67,35 @@ class ManajemenData extends CI_Controller
             $idPart = $this->input->post('id_part[]');
             $nmPart = $this->input->post('nm_part[]');
             $harga = $this->input->post('harga[]');
-            $detailServis = array();
-            for ($i = 0; $i < count($idPart); $i++) {
-                $detailServis[$i] = array(
-                    'id_servis' => $this->input->post('id_servis'),
-                    'id_part' => $idPart[$i],
-                    'nm_part' => $nmPart[$i],
-                    'harga' => $harga[$i]
-                );
+            if ($idPart == null) {
+                redirect('ManajemenData/servis_tambah');
+            } else {
+                $detailServis = array();
+                for ($i = 0; $i < count($idPart); $i++) {
+                    $detailServis[$i] = array(
+                        'id_servis' => $this->input->post('id_servis'),
+                        'id_part' => $idPart[$i],
+                        'nm_part' => $nmPart[$i],
+                        'harga' => $harga[$i]
+                    );
+                }
+                $this->db->insert_batch('detail_servis', $detailServis);
+
+                $biaya = array_sum($harga);
+                $this->db->set('id_servis', $this->input->post('id_servis'));
+                $this->db->set('tgl', Date('Y-m-d H:i:s'));
+                $this->db->set('id_pelanggan', $this->input->post('id_pelanggan'));
+                $this->db->set('nm_pelanggan', $this->input->post('nm_pelanggan'));
+                $this->db->set('no_hp', $this->input->post('no_hp'));
+                $this->db->set('tipe_laptop', $this->input->post('tipe_laptop'));
+                $this->db->set('keluhan_awal', $this->input->post('keluhan_awal'));
+                $this->db->set('nm_teknisi', $this->input->post('nm_teknisi'));
+                $this->db->set('total_harga', $biaya);
+                $this->db->insert('servis');
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil ditambahkan!</div>');
+                redirect('ManajemenData');
             }
-            $this->db->insert_batch('detail_servis', $detailServis);
-
-            $biaya = array_sum($harga);
-            $this->db->set('id_servis', $this->input->post('id_servis'));
-            $this->db->set('tgl', Date('Y-m-d H:i:s'));
-            $this->db->set('id_pelanggan', $this->input->post('id_pelanggan'));
-            $this->db->set('nm_pelanggan', $this->input->post('nm_pelanggan'));
-            $this->db->set('no_hp', $this->input->post('no_hp'));
-            $this->db->set('tipe_laptop', $this->input->post('tipe_laptop'));
-            $this->db->set('keluhan_awal', $this->input->post('keluhan_awal'));
-            $this->db->set('nm_teknisi', $this->input->post('nm_teknisi'));
-            $this->db->set('total_harga', $biaya);
-            $this->db->insert('servis');
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil ditambahkan!</div>');
-            redirect('ManajemenData');
         }
     }
 
@@ -180,7 +185,7 @@ class ManajemenData extends CI_Controller
             $this->load->view('ManajemenData/servis_ubah', $data);
             $this->load->view('templates/footer');
         } else {
-            // $id_part = $this->input->post('id_part');
+            $idPart = $this->input->post('id_part[]');
             // $jumlah = $this->input->post('jumlah');
             // $query = $this->db->get_where('part', ['id_part' => $id_part])->row_array();
 
@@ -188,10 +193,13 @@ class ManajemenData extends CI_Controller
             //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-circle"></i> Gagal, jumlah part melampaui ketersediaan!</div>');
             //     redirect('ManajemenData');
             // } else {
-            $this->ManajemenData_model->ubah_servis();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil diperbarui!</div>');
-            redirect('ManajemenData');
-            // }
+            if ($idPart == null) {
+                redirect('ManajemenData/servis_ubah/' . $id);
+            } else {
+                $this->ManajemenData_model->ubah_servis();
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"><i class="fas fa-info-circle"></i> Data Servis berhasil diperbarui!</div>');
+                redirect('ManajemenData');
+            }
         }
     }
 

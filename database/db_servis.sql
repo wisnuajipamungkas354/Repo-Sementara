@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 08:57 AM
+-- Generation Time: Dec 19, 2023 at 05:05 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,9 +40,8 @@ CREATE TABLE `detail_servis` (
 --
 
 INSERT INTO `detail_servis` (`id`, `id_servis`, `id_part`, `nm_part`, `harga`) VALUES
-(6, 'S0001', 'LCD001', 'LCD 14 Inch Slim 40 Pin', 750000),
-(7, 'S0001', 'LCD002', 'LCD 14 Inch 30 Pin', 800000),
-(8, 'S0001', 'LCD002', 'LCD 14 Inch 30 Pin', 800000);
+(9, 'S0002', 'B001', 'SSD SATA III V-gen 128GB', 215000),
+(11, 'S0003', 'B002', 'SSD SATA III V-gen 256GB', 335000);
 
 -- --------------------------------------------------------
 
@@ -65,8 +64,23 @@ CREATE TABLE `faktur` (
 --
 
 INSERT INTO `faktur` (`no_faktur`, `tgl`, `id_supplier`, `id_part`, `harga_part`, `jumlah`, `total_faktur`) VALUES
-('F0001', '2023-12-12', '1', 'B006', 215000, 100, 21500000),
-('F0002', '2023-12-12', '1', 'B006', 225000, 100, 22500000);
+('F0001', '2023-12-12', '1', 'B001', 215000, 5, 1075000),
+('F0002', '2023-12-12', '1', 'B002', 335000, 5, 1675000),
+('F0003', '2023-12-12', '1', 'B003', 320000, 5, 1600000),
+('F0004', '2023-12-12', '1', 'B004', 205000, 5, 1025000),
+('F0005', '2023-12-12', '1', 'B001', 215000, 6, 1290000),
+('F0006', '2023-12-18', '2', 'B005', 750000, 5, 3750000),
+('F0007', '2023-12-19', '2', 'B006', 700000, 5, 3500000),
+('F0008', '2023-12-19', '2', 'B007', 1200000, 4, 4800000),
+('F0009', '2023-12-19', '2', 'B008', 550000, 10, 5500000),
+('F0010', '2023-12-19', '2', 'B009', 500000, 8, 4000000),
+('F0011', '2023-12-19', '2', 'B007', 1200000, 4, 4800000),
+('F0012', '2023-12-19', '1', 'B010', 35000, 15, 525000),
+('F0013', '2023-12-19', '2', 'B011', 25000, 100, 2500000),
+('F0014', '2023-12-19', '2', 'B012', 150000, 5, 750000),
+('F0015', '2023-12-19', '4', 'B013', 100000, 10, 1000000),
+('F0016', '2023-12-19', '4', 'B014', 250000, 6, 1500000),
+('F0017', '2023-12-19', '4', 'B015', 350000, 4, 1400000);
 
 -- --------------------------------------------------------
 
@@ -88,7 +102,8 @@ CREATE TABLE `karyawan` (
 INSERT INTO `karyawan` (`id_karyawan`, `nm_karyawan`, `noHp_karyawan`, `jabatan`) VALUES
 ('P01', 'Muhammad Naufal Saputra', '085712345678', 'Teknisi'),
 ('P02', 'Jodi Ramadhan', '085812345678', 'Admin'),
-('P03', 'Wisnu Aji Pamungkas', '085889634432', 'Owner');
+('P03', 'Wisnu Aji Pamungkas', '085889634432', 'Owner'),
+('P04', 'Hilmi', '085812345678', 'Teknisi');
 
 -- --------------------------------------------------------
 
@@ -108,7 +123,9 @@ CREATE TABLE `laporan` (
 --
 
 INSERT INTO `laporan` (`id_laporan`, `tgl`, `no_nota`, `total`) VALUES
-('L0001', '2023-12-12', 'N0001', 2450000);
+('L0001', '2023-12-12', 'N0001', 2450000),
+('L0002', '2023-12-12', 'N0002', 265000),
+('L0003', '2023-12-18', 'N0003', 435000);
 
 -- --------------------------------------------------------
 
@@ -119,28 +136,30 @@ INSERT INTO `laporan` (`id_laporan`, `tgl`, `no_nota`, `total`) VALUES
 CREATE TABLE `part` (
   `id_part` varchar(6) NOT NULL,
   `nm_part` varchar(100) DEFAULT NULL,
-  `harga_part` int(6) DEFAULT NULL,
-  `stok` int(6) DEFAULT NULL
+  `stok` int(6) DEFAULT NULL,
+  `harga_part` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `part`
 --
 
-INSERT INTO `part` (`id_part`, `nm_part`, `harga_part`, `stok`) VALUES
-('B006', 'SSD SATA III V-gen 128GB', 225000, 100),
-('INS001', 'Install Software', 50000, 1000),
-('INW001', 'Install Windows 7/8/10/11 32/64bit', 100000, 1000),
-('LCD001', 'LCD 14 Inch Slim 40 Pin', 750000, 100),
-('LCD002', 'LCD 14 Inch Slim 30 Pin', 800000, 100),
-('LCD003', 'LCD 14 Inch Tebal 30 Pin', 550000, 100),
-('LCD004', 'LCD 14 Inch Tebal 40 Pin', 600000, 100),
-('LCD005', 'LCD FHD 14 Inch Slim 30 Pin', 120000, 100),
-('RAM001', 'RAM DDR3/L 2GB', 100000, 100),
-('RAM002', 'RAM DDR3/L 4GB', 150000, 100),
-('RAM003', 'RAM DDR3/L 8GB', 250000, 100),
-('RAM004', 'RAM DDR4 4GB', 250000, 100),
-('RAM005', 'RAM DDR4 8GB', 450000, 100);
+INSERT INTO `part` (`id_part`, `nm_part`, `stok`, `harga_part`) VALUES
+('B001', 'SSD SATA III V-gen 128GB', 6, 215000),
+('B002', 'SSD SATA III V-gen 256GB', 5, 335000),
+('B003', 'SSD SATA III V-gen 240GB', 5, 320000),
+('B004', 'SSD SATA III V-gen 120GB', 5, 205000),
+('B005', 'LCD 14 Inch Slim 40 Pin', 5, 750000),
+('B006', 'LCD 14 Inch Slim 30 Pin', 5, 700000),
+('B007', 'LCD fHD 14 Inch Slim 30 Pin', 4, 1200000),
+('B008', 'LCD 14 Inch Tebal 40 Pin', 10, 550000),
+('B009', 'LCD 14 Inch tebal 30 Pin', 8, 500000),
+('B010', 'Caddy For HDD', 15, 35000),
+('B011', 'Pasta Processor/VGA', 100, 25000),
+('B012', 'RAM DDR3/L 4GB', 5, 150000),
+('B013', 'RAM DDR3/L 2GB', 10, 100000),
+('B014', 'RAM DDR4 4GB', 6, 250000),
+('B015', 'RAM DDR4 8GB', 4, 350000);
 
 -- --------------------------------------------------------
 
@@ -159,7 +178,11 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nm_pelanggan`, `no_hp`) VALUES
-('C0001', 'Dina Aulia Sabilla', '085889634432');
+('C0002', 'Zhelitaayu nurul Liza', '085812345678'),
+('C0003', 'Jodi Ramadhan', '085889634432'),
+('C0004', 'Jodi Ramadhan', '08561234567'),
+('C0005', 'Jodi Ramadhan', '085812345678'),
+('C0006', 'Jodi Ramadhan', '085889634432');
 
 -- --------------------------------------------------------
 
@@ -186,7 +209,9 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`no_nota`, `nm_admin`, `tgl`, `id_servis`, `nm_pelanggan`, `tipe_laptop`, `keluhan_awal`, `nm_teknisi`, `total_harga`, `biaya_jasa`, `total`) VALUES
-('N0001', 'Wisnu Aji Pamungkas', '2023-12-12', 'S0001', 'Dina Aulia Sabilla', 'Asus X453M', 'Mati', 'Zhelitaayu Nurul Liza', 2350000, 100000, 2450000);
+('N0001', 'Wisnu Aji Pamungkas', '2023-12-12', 'S0001', 'Dina Aulia Sabilla', 'Asus X453M', 'Mati', 'Zhelitaayu Nurul Liza', 2350000, 100000, 2450000),
+('N0002', 'Jodi Ramadhan', '2023-12-12', 'S0002', 'Zhelitaayu nurul Liza', 'Lenovo IdeaPad 5', 'Upgrade SSD', 'Muhammad Naufal Saputra', 215000, 50000, 265000),
+('N0003', 'Jodi Ramadhan', '2023-12-18', 'S0003', 'Jodi Ramadhan', 'Lenovo IdeaPad 14', 'Upgrade SSD', 'Muhammad Naufal Saputra', 335000, 100000, 435000);
 
 -- --------------------------------------------------------
 
@@ -211,7 +236,8 @@ CREATE TABLE `servis` (
 --
 
 INSERT INTO `servis` (`id_servis`, `tgl`, `id_pelanggan`, `nm_pelanggan`, `no_hp`, `tipe_laptop`, `keluhan_awal`, `nm_teknisi`, `total_harga`) VALUES
-('S0001', '2023-12-12 07:13:38', 'C0001', 'Dina Aulia Sabilla', '085889634432', 'Asus X453M', 'Mati', 'Zhelitaayu Nurul Liza', 2350000);
+('S0002', '2023-12-12 16:51:33', 'C0002', 'Zhelitaayu nurul Liza', '085812345678', 'Lenovo IdeaPad 5', 'Upgrade SSD', 'Muhammad Naufal Saputra', 215000),
+('S0003', '2023-12-18 16:19:56', 'C0006', 'Jodi Ramadhan', '085889634432', 'Lenovo IdeaPad 14', 'Upgrade SSD', 'Muhammad Naufal Saputra', 335000);
 
 -- --------------------------------------------------------
 
@@ -256,7 +282,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_karyawan`, `id_role`, `nm_karyawan`, `username`, `password`, `image`, `status_akun`) VALUES
 ('P01', 2, 'Muhammad Naufal Saputra', 'owner1', '$2y$10$LonyBzE3xsxdNcnsFcTfO.H7pM56gX.41CLuhs9SV/RP0J0VX.dOi', 'default.svg', 'Aktif'),
-('P02', 1, 'Jodi Ramadhan', 'admin123', '$2y$10$ZllKi4Mn9sWI/5yRNLMjwuAK9gZhsmif3Xnt/m5uRE5bqdRqsvfGa', 'default.svg', 'Aktif'),
+('P02', 1, 'Jodi Ramadhan', 'admin123', '$2y$10$d9bUotgALqfC80aB0xQivewtXQKacaBB4kW4ClLpUb4poAEKH3VQi', 'default.svg', 'Aktif'),
 ('P03', 2, 'Wisnu Aji Pamungkas', 'owner123', '$2y$10$I0SYmzTJXlLms.As05DSAeMB/ZY4Oen7fwiJ/NOuEpdI4m7b.VLCu', 'default.svg', 'Aktif');
 
 -- --------------------------------------------------------
@@ -283,7 +309,8 @@ INSERT INTO `user_access` (`id_access`, `id_role`, `id_menu`) VALUES
 (5, 2, 5),
 (6, 2, 6),
 (7, 2, 7),
-(8, 2, 8);
+(8, 2, 8),
+(9, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -421,13 +448,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `detail_servis`
 --
 ALTER TABLE `detail_servis`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id_access` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_access` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_menu`

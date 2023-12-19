@@ -40,7 +40,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="<?= base_url('assets/img/login/'); ?>bg-login3.jpg" alt="image" width="410" height="auto">
+                                <img src="<?= base_url('assets/img/login/'); ?>bg-login3.jpg" alt="image" width="100%" height="100%">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-3">

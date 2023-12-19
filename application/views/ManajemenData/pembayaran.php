@@ -59,7 +59,6 @@
                                         <td><?= $pembayaran['nm_pelanggan']; ?></td>
                                         <td>Rp <?= number_format($pembayaran['total'], 0, ',', '.'); ?></td>
                                         <td style="text-align: center;">
-                                            <a href="<?= base_url('ManajemenData/pembayaran_ekspor/'); ?><?= $pembayaran['no_nota']; ?>" title="Ekspor" class="btn btn-circle btn-danger"><i class="fas fa-fw fa-file-pdf"></i></a>
                                             <a href="<?= base_url('ManajemenData/pembayaran_detail/'); ?><?= $pembayaran['no_nota']; ?>" title="Detail" class="btn btn-circle btn-primary my-1"><i class="fas fa-fw fa-eye"></i></a>
                                             <a href="<?= base_url('ManajemenData/pembayaran_ubah/'); ?><?= $pembayaran['no_nota']; ?>" title="Ubah" class="btn btn-circle btn-warning my-1"><i class="fas fa-fw fa-edit"></i></a>
                                             <a href="<?= base_url('ManajemenData/pembayaran_hapus/'); ?><?= $pembayaran['no_nota']; ?>" title="Hapus" class="btn btn-danger btn-circle delete-pembayaran"><i class="fas fa-fw fa-trash"></i></a>

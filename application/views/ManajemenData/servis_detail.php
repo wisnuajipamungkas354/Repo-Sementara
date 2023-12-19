@@ -34,7 +34,7 @@
                                                      <td>: <?= $riwayat_servis['no_hp']; ?></td>
                                                  </tr>
                                                  <tr>
-                                                     <td class="font-weight-bold"> Merk Kendaraan</td>
+                                                     <td class="font-weight-bold"> Merk & Tipe Laptop</td>
                                                      <td>: <?= $riwayat_servis['tipe_laptop']; ?></td>
                                                  </tr>
                                                  <tr>

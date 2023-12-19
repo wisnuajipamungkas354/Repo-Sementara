@@ -58,7 +58,6 @@
                                                 <td><?= $servis['tipe_laptop']; ?></td>
                                                 <td><?= $servis['keluhan_awal']; ?></td>
                                                 <td style="text-align: center;">
-                                                    <a href="<?= base_url('ManajemenData/servis_ekspor/'); ?><?= $servis['id_servis']; ?>" title="Ekspor" class="btn btn-circle btn-danger"><i class="fas fa-fw fa-file-pdf"></i></a>
                                                     <a href="<?= base_url('ManajemenData/servis_detail/'); ?><?= $servis['id_servis']; ?>" title="Detail" class="btn btn-circle btn-primary my-1"><i class="fas fa-fw fa-eye"></i></a>
                                                     <a href="<?= base_url('ManajemenData/servis_ubah/'); ?><?= $servis['id_servis']; ?>" title="Ubah" class="btn btn-circle btn-warning my-1"><i class="fas fa-fw fa-edit"></i></a>
                                                     <a href="<?= base_url('ManajemenData/servis_hapus/'); ?><?= $servis['id_pelanggan']; ?>" title="Hapus" class="btn btn-danger btn-circle delete-servis"><i class="fas fa-fw fa-trash"></i></a>
